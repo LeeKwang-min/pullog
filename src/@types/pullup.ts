@@ -18,9 +18,10 @@ export type TPullupSnsLink = {
 };
 
 export interface ISPullupSetData {
-  id: number;
+  id?: number;
+  set: number;
   count: number;
-  time: TPullupSetTime;
+  time?: TPullupSetTime;
 }
 
 export interface IPullupData {
