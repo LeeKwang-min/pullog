@@ -8,45 +8,85 @@ import {
   CalendarDaysIcon,
   ChevronLeftIcon,
   CirclePlusIcon,
+  RefreshCcwIcon,
+  Trash2Icon,
 } from "lucide-react";
 import { useEffect, useState } from "react";
 
 import {
   Card,
   CardContent,
-  CardDescription,
   CardFooter,
   CardHeader,
-  CardTitle,
 } from "@/components/ui/card";
 import { Label } from "@/components/ui/label";
 import { Input } from "@/components/ui/input";
+import { useRouter } from "next/navigation";
+import { useDateData } from "@/context/dateContext";
 
 function Log() {
-  const { date, getMonth, getDay, getYear, getDayStr } = useDateLogic();
-  const [pullupDate, setPullupDate] = useState<ISPullupSetData[]>([
+  const router = useRouter();
+  const { date, setDate, getYear, getMonth, getDay, getDayStr } = useDateData();
+  const [pullupData, setPullupData] = useState<ISPullupSetData[]>([
     {
-      set: 1,
       count: 0,
     },
   ]);
 
   const addSet = () => {
-    setPullupDate((prev) => [
+    setPullupData((prev) => [
       ...prev,
       {
-        set: prev.length + 1,
         count: 0,
       },
     ]);
+  };
+
+  const deleteSet = (idx: number) => {
+    setPullupData((prev) => prev.filter((_, i) => idx !== i));
+  };
+
+  const handleSetData = (key: string, idx: number, value: number) => {
+    setPullupData((prev) => {
+      return prev.map((item, i) => {
+        if (idx === i)
+          return {
+            ...item,
+            [key]: value,
+          };
+        else return item;
+      });
+    });
+  };
+
+  const refreshSetData = (idx: number) => {
+    setPullupData((prev) => {
+      return prev.map((item, i) => {
+        if (idx === i)
+          return {
+            count: 0,
+          };
+        else return item;
+      });
+    });
+  };
+
+  const handleSaveData = () => {
+    // 1. 저장 validation (number 체크, 값 입력 체크 등등)
+    // 2. validation fail시 알림 띄우기
+    // 3. 서버에 데이터 저장
+    // 4. 저장 완료 알림 후 logCalendar로 이동
+    console.log(pullupData);
+    router.push("/log/calendar");
   };
 
   return (
     <main className="relative w-full h-full flex flex-col px-4 py-4 gap-4">
       <ScreenReaderTitle title="철봉 기록 입력 페이지" />
       <div className="w-full flex items-center justify-between">
+        <ScreenReaderTitle title="철봉 기록 입력 페이지 헤더" step={2} />
         <ChevronLeftIcon size={24} />
-        <h3 className="justify-self-center font-bold">풀업 기록</h3>
+        <h3 className="font-bold">풀업 기록</h3>
         <CalendarDaysIcon size={24} />
       </div>
 
@@ -64,49 +104,89 @@ function Log() {
         <CardContent className="w-full flex flex-col items-center grow max-h-fit overflow-scroll">
           <ScreenReaderTitle title="세트, 횟수 입력 섹션" step={2} />
           <div className="flex flex-col gap-2 w-full">
-            {pullupDate.map((pullup, idx) => {
-              const { set, count, time } = pullup;
+            {pullupData.map((pullup, idx) => {
+              const { count, minute, second } = pullup;
 
               return (
                 <div
                   key={idx}
                   className="flex flex-col gap-2 w-full border py-2 px-2 rounded-md"
                 >
-                  <div className="flex items-center">
-                    <Label htmlFor={`${set}set`} className="text-xs">
-                      {set} 세트
+                  <div className="grid grid-cols-6 items-center">
+                    <Label
+                      htmlFor={`${idx + 1}set`}
+                      className="text-sm font-semibold"
+                    >
+                      {idx + 1} 세트
                     </Label>
                     <Input
-                      id={`${set}set`}
-                      value={count}
-                      onChange={(e) => console.log(e)}
-                      className="h-8 text-xs grow"
+                      id={`${idx + 1}set`}
+                      type="number"
+                      value={count || ""}
+                      onChange={(e) =>
+                        handleSetData("count", idx, Number(e.target.value))
+                      }
+                      className="h-8 text-sm col-span-2"
                     />
-                    <Label htmlFor={`${set}set`} className="text-xs">
+                    <Label
+                      htmlFor={`${idx + 1}set`}
+                      className="text-sm font-semibold px-2"
+                    >
                       회
                     </Label>
+                    <div className="flex items-center gap-2 col-span-2 justify-end">
+                      <button
+                        onClick={() => refreshSetData(idx)}
+                        className="rounded-full border px-1 py-1"
+                      >
+                        <RefreshCcwIcon color="#71b0c2" size={18} />
+                      </button>
+                      <button
+                        onClick={() => deleteSet(idx)}
+                        className="rounded-full border px-1 py-1"
+                      >
+                        <Trash2Icon color="#ff8585" size={18} />
+                      </button>
+                    </div>
                   </div>
 
-                  <div className="flex items-center">
-                    <Input
-                      id={`${set}setMinute`}
-                      value={time?.minute}
-                      onChange={(e) => console.log(e)}
-                      className="w-10 h-8 mr-1 text-xs"
-                    />
-                    <Label htmlFor={`${set}setMinute`} className="mr-3 text-xs">
-                      분
-                    </Label>
+                  <div className="grid grid-cols-6 items-center gap-2">
+                    <div />
+                    <div className="flex items-center col-span-2">
+                      <Input
+                        id={`${idx + 1}setMinute`}
+                        type="number"
+                        value={minute || ""}
+                        onChange={(e) =>
+                          handleSetData("minute", idx, Number(e.target.value))
+                        }
+                        className="h-8 mr-1 text-sm"
+                      />
+                      <Label
+                        htmlFor={`${idx + 1}setMinute`}
+                        className="text-sm font-semibold"
+                      >
+                        분
+                      </Label>
+                    </div>
 
-                    <Input
-                      id={`${set}setSec`}
-                      value={time?.second}
-                      onChange={(e) => console.log(e)}
-                      className="w-10 h-8 mr-1 text-xs"
-                    />
-                    <Label htmlFor={`${set}setSec`} className="text-xs">
-                      초
-                    </Label>
+                    <div className="flex items-center gap-1 col-span-2">
+                      <Input
+                        id={`${idx + 1}setSec`}
+                        type="number"
+                        value={second || ""}
+                        onChange={(e) =>
+                          handleSetData("second", idx, Number(e.target.value))
+                        }
+                        className="h-8 mr-1 text-sm"
+                      />
+                      <Label
+                        htmlFor={`${idx + 1}setSec`}
+                        className="text-sm font-semibold"
+                      >
+                        초
+                      </Label>
+                    </div>
                   </div>
                 </div>
               );
@@ -117,7 +197,9 @@ function Log() {
           </Button>
         </CardContent>
         <CardFooter className="w-full">
-          <Button className="w-full">저장하기</Button>
+          <Button onClick={() => handleSaveData()} className="w-full">
+            저장하기
+          </Button>
         </CardFooter>
       </Card>
     </main>

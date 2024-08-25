@@ -7,11 +7,6 @@ export type TDayConst =
   | "SATURDAY"
   | "SUNDAY";
 
-export type TPullupSetTime = {
-  minute: number;
-  second: number;
-};
-
 export type TPullupSnsLink = {
   instar?: string;
   youtube?: string;
@@ -19,9 +14,9 @@ export type TPullupSnsLink = {
 
 export interface ISPullupSetData {
   id?: number;
-  set: number;
   count: number;
-  time?: TPullupSetTime;
+  minute?: number;
+  second?: number;
 }
 
 export interface IPullupData {
