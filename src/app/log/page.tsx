@@ -70,26 +70,28 @@ function Log() {
               return (
                 <div
                   key={idx}
-                  className="w-full flex items-center border py-2 px-2 justify-around rounded-md"
+                  className="flex flex-col gap-2 w-full border py-2 px-2 rounded-md"
                 >
-                  <Label htmlFor={`${set}set`} className="text-xs">
-                    {set} 세트
-                  </Label>
-                  <div className="flex items-center col-span-2 gap-1">
+                  <div className="flex items-center">
+                    <Label htmlFor={`${set}set`} className="text-xs">
+                      {set} 세트
+                    </Label>
                     <Input
                       id={`${set}set`}
                       value={count}
-                      className="w-14 h-8 text-xs"
+                      onChange={(e) => console.log(e)}
+                      className="h-8 text-xs grow"
                     />
                     <Label htmlFor={`${set}set`} className="text-xs">
                       회
                     </Label>
                   </div>
 
-                  <div className="flex items-center col-span-2">
+                  <div className="flex items-center">
                     <Input
                       id={`${set}setMinute`}
                       value={time?.minute}
+                      onChange={(e) => console.log(e)}
                       className="w-10 h-8 mr-1 text-xs"
                     />
                     <Label htmlFor={`${set}setMinute`} className="mr-3 text-xs">
@@ -99,6 +101,7 @@ function Log() {
                     <Input
                       id={`${set}setSec`}
                       value={time?.second}
+                      onChange={(e) => console.log(e)}
                       className="w-10 h-8 mr-1 text-xs"
                     />
                     <Label htmlFor={`${set}setSec`} className="text-xs">
