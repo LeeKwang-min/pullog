@@ -16,30 +16,30 @@ import {
   subMonths,
 } from "date-fns";
 import { ChevronLeftIcon, ChevronRightIcon } from "lucide-react";
-import { Dispatch, SetStateAction } from "react";
+import { Dispatch, SetStateAction, useState } from "react";
 
 const DATE_STR_LIST = ["월", "화", "수", "목", "금", "토", "일"];
 
-interface ICalendarComponentProps {
-  date: Date;
-  setDate: Dispatch<SetStateAction<Date>>;
+interface ICalendarHeaderProps {
+  viewDate: Date;
+  setViewDate: Dispatch<SetStateAction<Date>>;
 }
 
-function CalendarHeader({ date, setDate }: ICalendarComponentProps) {
+function CalendarHeader({ viewDate, setViewDate }: ICalendarHeaderProps) {
   const handlePrevMonth = () => {
-    setDate(subMonths(date, 1));
+    setViewDate(subMonths(viewDate, 1));
   };
 
   const handleNextMonth = () => {
-    setDate(addMonths(date, 1));
+    setViewDate(addMonths(viewDate, 1));
   };
 
   return (
     <div className="flex justify-between items-center border-b">
       <ScreenReaderTitle title="철봉 기록 달력 헤더" step={3} />
       <div className="flex items-end gap-1 px-3 py-4">
-        <span className="text-2xl font-bold">{format(date, "M")}월</span>
-        <span className="text-xs font-bold">{format(date, "yyyy")}년</span>
+        <span className="text-2xl font-bold">{format(viewDate, "M")}월</span>
+        <span className="text-xs font-bold">{format(viewDate, "yyyy")}년</span>
       </div>
       <div className="flex items-center gap-3 px-3 py-4">
         <button onClick={handlePrevMonth}>
@@ -71,9 +71,21 @@ function CalendarDaysStr() {
   );
 }
 
-function CalendarDays({ date, setDate }: ICalendarComponentProps) {
-  const monthStartDate = startOfMonth(date);
-  const monthEndDate = endOfMonth(date);
+interface ICalendarDaysProps {
+  date: Date;
+  setDate: Dispatch<SetStateAction<Date>>;
+  viewDate: Date;
+  setViewDate: Dispatch<SetStateAction<Date>>;
+}
+
+function CalendarDays({
+  date,
+  setDate,
+  viewDate,
+  setViewDate,
+}: ICalendarDaysProps) {
+  const monthStartDate = startOfMonth(viewDate);
+  const monthEndDate = endOfMonth(monthStartDate);
   const calendarStartDate = startOfWeek(monthStartDate);
   const calendarEndDate = endOfWeek(monthEndDate);
 
@@ -94,10 +106,15 @@ function CalendarDays({ date, setDate }: ICalendarComponentProps) {
             key={index}
             className={cn(
               "w-10 h-10 flex items-center justify-center",
-              isSameMonth(day, date) ? "text-black" : "text-gray-400",
-              isSameDay(day, date) && "rounded-full bg-gray-600 text-white"
+              isSameMonth(day, viewDate) ? "text-black" : "text-gray-400",
+              isSameDay(day, date) &&
+                isSameDay(day, viewDate) &&
+                "rounded-full bg-gray-600 text-white"
             )}
-            onClick={() => setDate(day)}
+            onClick={() => {
+              setDate(day);
+              setViewDate(day);
+            }}
           >
             {format(day, "d")}
           </div>
@@ -112,13 +129,20 @@ interface IProps {}
 function Calendar({}: IProps) {
   const { date, setDate } = useDateData();
 
+  const [viewDate, setViewDate] = useState<Date>(date);
+
   return (
     <section className="w-full border rounded-md">
       <ScreenReaderTitle title="철봉 기록 달력 페이지 본문 - 달력" step={2} />
-      <CalendarHeader date={date} setDate={setDate} />
+      <CalendarHeader viewDate={viewDate} setViewDate={setViewDate} />
       <div className="w-full flex flex-col px-1 py-2">
         <CalendarDaysStr />
-        <CalendarDays date={date} setDate={setDate} />
+        <CalendarDays
+          date={date}
+          setDate={setDate}
+          viewDate={viewDate}
+          setViewDate={setViewDate}
+        />
       </div>
     </section>
   );
