@@ -8,14 +8,13 @@ export type TDayConst =
   | "SUNDAY";
 
 export type TPullupSnsLink = {
-  instar?: string;
+  instagram?: string;
   youtube?: string;
 };
 
 export interface ISPullupSetData {
   id?: number;
   count: number;
-  minute?: number;
   second?: number;
 }
 
@@ -23,7 +22,7 @@ export interface IPullupData {
   date: string;
   day: TDayConst;
   setData: ISPullupSetData[];
-  snsLink?: TPullupSnsLink;
+  snsLink?: string;
 }
 
 export interface IGetPullupResponse {

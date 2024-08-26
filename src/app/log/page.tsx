@@ -3,15 +3,15 @@
 import { ISPullupSetData } from "@/@types/pullup";
 import ScreenReaderTitle from "@/components/common/ScreenReaderTitle";
 import { Button } from "@/components/ui/button";
-import useDateLogic from "@/hooks/useDate";
 import {
   CalendarDaysIcon,
   ChevronLeftIcon,
   CirclePlusIcon,
+  LinkIcon,
   RefreshCcwIcon,
   Trash2Icon,
 } from "lucide-react";
-import { useEffect, useState } from "react";
+import { useEffect, useRef, useState } from "react";
 
 import {
   Card,
@@ -27,6 +27,7 @@ import { useDateData } from "@/context/dateContext";
 function Log() {
   const router = useRouter();
   const { date, setDate, getYear, getMonth, getDay, getDayStr } = useDateData();
+  const snsLinkRef = useRef<HTMLInputElement>(null);
   const [pullupData, setPullupData] = useState<ISPullupSetData[]>([
     {
       count: 0,
@@ -80,6 +81,10 @@ function Log() {
     router.push("/log/calendar");
   };
 
+  const handleCalendarBtn = () => {
+    router.push("/log/calendar");
+  };
+
   return (
     <main className="relative w-full h-full flex flex-col px-4 py-4 gap-4">
       <ScreenReaderTitle title="철봉 기록 입력 페이지" />
@@ -87,7 +92,7 @@ function Log() {
         <ScreenReaderTitle title="철봉 기록 입력 페이지 헤더" step={2} />
         <ChevronLeftIcon size={24} />
         <h3 className="font-bold">풀업 기록</h3>
-        <CalendarDaysIcon size={24} />
+        <CalendarDaysIcon size={24} onClick={handleCalendarBtn} />
       </div>
 
       <Card className="w-full grow relative flex flex-col overflow-scroll">
@@ -105,7 +110,7 @@ function Log() {
           <ScreenReaderTitle title="세트, 횟수 입력 섹션" step={2} />
           <div className="flex flex-col gap-2 w-full">
             {pullupData.map((pullup, idx) => {
-              const { count, minute, second } = pullup;
+              const { count, second } = pullup;
 
               return (
                 <div
@@ -134,6 +139,31 @@ function Log() {
                     >
                       회
                     </Label>
+                  </div>
+
+                  <div className="grid grid-cols-6 items-center">
+                    <Label
+                      htmlFor={`${idx + 1}setSec`}
+                      className="text-sm font-semibold"
+                    >
+                      시간
+                    </Label>
+                    <Input
+                      id={`${idx + 1}setSec`}
+                      type="number"
+                      value={second || ""}
+                      onChange={(e) =>
+                        handleSetData("second", idx, Number(e.target.value))
+                      }
+                      className="h-8 text-sm col-span-2"
+                    />
+                    <Label
+                      htmlFor={`${idx + 1}setSec`}
+                      className="text-sm font-semibold px-2"
+                    >
+                      초
+                    </Label>
+
                     <div className="flex items-center gap-2 col-span-2 justify-end">
                       <button
                         onClick={() => refreshSetData(idx)}
@@ -149,52 +179,20 @@ function Log() {
                       </button>
                     </div>
                   </div>
-
-                  <div className="grid grid-cols-6 items-center gap-2">
-                    <div />
-                    <div className="flex items-center col-span-2">
-                      <Input
-                        id={`${idx + 1}setMinute`}
-                        type="number"
-                        value={minute || ""}
-                        onChange={(e) =>
-                          handleSetData("minute", idx, Number(e.target.value))
-                        }
-                        className="h-8 mr-1 text-sm"
-                      />
-                      <Label
-                        htmlFor={`${idx + 1}setMinute`}
-                        className="text-sm font-semibold"
-                      >
-                        분
-                      </Label>
-                    </div>
-
-                    <div className="flex items-center gap-1 col-span-2">
-                      <Input
-                        id={`${idx + 1}setSec`}
-                        type="number"
-                        value={second || ""}
-                        onChange={(e) =>
-                          handleSetData("second", idx, Number(e.target.value))
-                        }
-                        className="h-8 mr-1 text-sm"
-                      />
-                      <Label
-                        htmlFor={`${idx + 1}setSec`}
-                        className="text-sm font-semibold"
-                      >
-                        초
-                      </Label>
-                    </div>
-                  </div>
                 </div>
               );
             })}
           </div>
-          <Button variant="ghost" onClick={addSet} className="mb-10">
+          <Button variant="ghost" onClick={addSet} className="mb-6">
             <CirclePlusIcon />
           </Button>
+          <div className="w-full flex flex-col gap-1">
+            <Label htmlFor="snsLink" className="flex items-center gap-1">
+              <LinkIcon size={14} color="#4b5563" />{" "}
+              <span className="text-sm text-gray-600">SNS 링크</span>
+            </Label>
+            <Input ref={snsLinkRef} id="snsLink" className="w-full h-8" />
+          </div>
         </CardContent>
         <CardFooter className="w-full">
           <Button onClick={() => handleSaveData()} className="w-full">

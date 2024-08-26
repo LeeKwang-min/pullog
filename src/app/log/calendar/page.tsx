@@ -1,14 +1,13 @@
 "use client";
 
 import ScreenReaderTitle from "@/components/common/ScreenReaderTitle";
-import { useDateData } from "@/context/dateContext";
 import { ChevronLeftIcon } from "lucide-react";
 import { useRouter } from "next/navigation";
 import Calendar from "../_components/Calendar";
+import DayRecord from "../_components/DayRecord";
 
 function LogCalendar() {
   const router = useRouter();
-  const { date, setDate, getYear, getMonth, getDay, getDayStr } = useDateData();
 
   const handleBackBtn = () => {
     router.push("/log");
@@ -27,8 +26,8 @@ function LogCalendar() {
         <h3 className="font-bold">풀업 달력</h3>
         <div />
       </section>
-
       <Calendar />
+      <DayRecord />
     </main>
   );
 }
