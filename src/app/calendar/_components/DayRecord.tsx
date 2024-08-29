@@ -5,7 +5,7 @@ import ScreenReaderTitle from "@/components/common/ScreenReaderTitle";
 import { Button } from "@/components/ui/button";
 import { TMP_DATA_SET } from "@/const/tmpData";
 import { useDateData } from "@/context/dateContext";
-import { format, Duration } from "date-fns";
+import { format } from "date-fns";
 import { FlameIcon } from "lucide-react";
 import { useRouter } from "next/navigation";
 import { useEffect, useState } from "react";
@@ -24,7 +24,7 @@ interface IPullupDataWithPrev {
 
 function DayRecord() {
   const router = useRouter();
-  const { date, getYear, getMonth, getDay, getDayStr } = useDateData();
+  const { selectDate: date, getMonth, getDay } = useDateData();
   const [todayData, setTodayData] = useState<IPullupDataWithPrev>({
     today: null,
     prev: null,
@@ -55,11 +55,10 @@ function DayRecord() {
 
   if (!todayData.today)
     return (
-      <section>
+      <section className="">
         <span>{`아직 ${getMonth(date)}월 ${getDay(
           date
         )}일 운동을 진행하지 않았어요`}</span>
-        <Button onClick={() => router.push("/log")}>입력하러 가기</Button>
       </section>
     );
 

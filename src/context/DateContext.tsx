@@ -5,6 +5,8 @@ import { SetStateAction, createContext, useContext, useState } from "react";
 interface IDateContextProps {
   date: Date;
   setDate: React.Dispatch<SetStateAction<Date>>;
+  selectDate: Date;
+  setSelectDate: React.Dispatch<SetStateAction<Date>>;
   getYear: (date: Date) => number;
   getMonth: (date: Date) => number;
   getDay: (date: Date) => number;
@@ -18,6 +20,7 @@ const DAY_STRING = ["일", "월", "화", "수", "목", "금", "토"];
 
 export const DateProvider = ({ children }: { children: React.ReactNode }) => {
   const [date, setDate] = useState<Date>(new Date());
+  const [selectDate, setSelectDate] = useState<Date>(new Date());
 
   const getYear = (curDate: Date) => {
     return curDate.getFullYear();
@@ -47,6 +50,8 @@ export const DateProvider = ({ children }: { children: React.ReactNode }) => {
       value={{
         date,
         setDate,
+        selectDate,
+        setSelectDate,
         getYear,
         getMonth,
         getDay,

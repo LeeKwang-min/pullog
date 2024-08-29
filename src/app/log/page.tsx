@@ -9,16 +9,12 @@ import {
   CirclePlusIcon,
   LinkIcon,
   RefreshCcwIcon,
+  SaveIcon,
   Trash2Icon,
 } from "lucide-react";
 import { useEffect, useRef, useState } from "react";
 
-import {
-  Card,
-  CardContent,
-  CardFooter,
-  CardHeader,
-} from "@/components/ui/card";
+import { Card, CardContent, CardHeader } from "@/components/ui/card";
 import { Label } from "@/components/ui/label";
 import { Input } from "@/components/ui/input";
 import { useRouter } from "next/navigation";
@@ -78,11 +74,11 @@ function Log() {
     // 3. 서버에 데이터 저장
     // 4. 저장 완료 알림 후 logCalendar로 이동
     console.log(pullupData);
-    router.push("/log/calendar");
+    router.push("/calendar");
   };
 
-  const handleCalendarBtn = () => {
-    router.push("/log/calendar");
+  const handleBackBtn = () => {
+    router.back();
   };
 
   return (
@@ -90,9 +86,9 @@ function Log() {
       <ScreenReaderTitle title="철봉 기록 입력 페이지" />
       <div className="w-full flex items-center justify-between">
         <ScreenReaderTitle title="철봉 기록 입력 페이지 헤더" step={2} />
-        <ChevronLeftIcon size={24} />
+        <ChevronLeftIcon size={24} onClick={() => handleBackBtn()} />
         <h3 className="font-bold">풀업 기록</h3>
-        <CalendarDaysIcon size={24} onClick={handleCalendarBtn} />
+        <SaveIcon size={24} onClick={() => handleSaveData()} />
       </div>
 
       <Card className="w-full grow relative flex flex-col overflow-scroll">
@@ -194,11 +190,6 @@ function Log() {
             <Input ref={snsLinkRef} id="snsLink" className="w-full h-8" />
           </div>
         </CardContent>
-        <CardFooter className="w-full">
-          <Button onClick={() => handleSaveData()} className="w-full">
-            저장하기
-          </Button>
-        </CardFooter>
       </Card>
     </main>
   );

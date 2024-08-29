@@ -72,15 +72,15 @@ function CalendarDaysStr() {
 }
 
 interface ICalendarDaysProps {
-  date: Date;
-  setDate: Dispatch<SetStateAction<Date>>;
+  selectDate: Date;
+  setSelectDate: Dispatch<SetStateAction<Date>>;
   viewDate: Date;
   setViewDate: Dispatch<SetStateAction<Date>>;
 }
 
 function CalendarDays({
-  date,
-  setDate,
+  selectDate,
+  setSelectDate,
   viewDate,
   setViewDate,
 }: ICalendarDaysProps) {
@@ -107,12 +107,12 @@ function CalendarDays({
             className={cn(
               "w-10 h-10 flex items-center justify-center",
               isSameMonth(day, viewDate) ? "text-black" : "text-gray-400",
-              isSameDay(day, date) &&
+              isSameDay(day, selectDate) &&
                 isSameDay(day, viewDate) &&
                 "rounded-full bg-gray-600 text-white"
             )}
             onClick={() => {
-              setDate(day);
+              setSelectDate(day);
               setViewDate(day);
             }}
           >
@@ -127,8 +127,7 @@ function CalendarDays({
 interface IProps {}
 
 function Calendar({}: IProps) {
-  const { date, setDate } = useDateData();
-
+  const { date, selectDate, setSelectDate } = useDateData();
   const [viewDate, setViewDate] = useState<Date>(date);
 
   return (
@@ -138,8 +137,8 @@ function Calendar({}: IProps) {
       <div className="w-full flex flex-col px-1 py-2">
         <CalendarDaysStr />
         <CalendarDays
-          date={date}
-          setDate={setDate}
+          selectDate={selectDate}
+          setSelectDate={setSelectDate}
           viewDate={viewDate}
           setViewDate={setViewDate}
         />
