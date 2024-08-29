@@ -16,6 +16,7 @@ import {
   calcTodayTotalTime,
   getDiffCountWord,
 } from "../_utils/dayRecord";
+import DayRecordEmpty from "./DayRecordEmpty";
 
 interface IPullupDataWithPrev {
   today: IPullupData | null;
@@ -53,13 +54,7 @@ function DayRecord() {
   }, [date]);
 
   if (!todayData.today)
-    return (
-      <section className="">
-        <span>{`아직 ${getMonth(date)}월 ${getDay(
-          date
-        )}일 운동을 진행하지 않았어요`}</span>
-      </section>
-    );
+    return <DayRecordEmpty month={getMonth(date)} day={getDay(date)} />;
 
   return (
     <section className="w-full border rounded-md px-1 py-2">
