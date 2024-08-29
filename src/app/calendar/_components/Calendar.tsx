@@ -9,6 +9,8 @@ import {
   endOfMonth,
   endOfWeek,
   format,
+  isAfter,
+  isBefore,
   isSameDay,
   isSameMonth,
   startOfMonth,
@@ -106,14 +108,17 @@ function CalendarDays({
             key={index}
             className={cn(
               "w-10 h-10 flex items-center justify-center",
-              isSameMonth(day, viewDate) ? "text-black" : "text-gray-400",
+              isSameMonth(day, viewDate) ? "text-black" : "text-gray-500",
               isSameDay(day, selectDate) &&
                 isSameDay(day, viewDate) &&
-                "rounded-full bg-gray-600 text-white"
+                "rounded-full bg-gray-600 text-white",
+              isAfter(day, new Date()) && "cursor-not-allowed, text-slate-300"
             )}
             onClick={() => {
-              setSelectDate(day);
-              setViewDate(day);
+              if (isBefore(day, new Date())) {
+                setSelectDate(day);
+                setViewDate(day);
+              }
             }}
           >
             {format(day, "d")}
