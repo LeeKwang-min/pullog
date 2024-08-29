@@ -23,7 +23,6 @@ interface IPullupDataWithPrev {
 }
 
 function DayRecord() {
-  const router = useRouter();
   const { selectDate: date, getMonth, getDay } = useDateData();
   const [todayData, setTodayData] = useState<IPullupDataWithPrev>({
     today: null,

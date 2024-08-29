@@ -9,7 +9,7 @@ import { useState } from "react";
 import { useDateData } from "@/context/dateContext";
 
 function LogCalendar() {
-  const { date, setDate, selectDate } = useDateData();
+  const { setDate, selectDate } = useDateData();
 
   const router = useRouter();
 
