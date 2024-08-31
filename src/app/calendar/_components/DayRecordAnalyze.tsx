@@ -106,7 +106,12 @@ function AnalyzeChart({ prevCount, todayCount }: IChartProps) {
           tickFormatter={(value) => value.slice(0, 3)}
           hide
         />
-        <XAxis dataKey="prevCount" type="number" hide />
+        <XAxis
+          dataKey="prevCount"
+          type="number"
+          domain={[0, Math.max(prevCount, todayCount) + 1]}
+          hide
+        />
         <ChartTooltip
           cursor={false}
           content={<ChartTooltipContent indicator="line" />}
