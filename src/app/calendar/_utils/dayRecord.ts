@@ -34,6 +34,14 @@ export const calcDiffTotalCountBetweenSet = (
   return totalTodayCount - totalPrevCount;
 };
 
+export const findBestCountSetIdx = (set: ISPullupSetData[]): number => {
+  return set.reduce(
+    (maxIndex, current, index, array) =>
+      current.count > array[maxIndex].count ? index : maxIndex,
+    0
+  );
+};
+
 export const getDiffCountWord = (diff: number) => {
   if (diff === 0) return "유지";
   if (diff < 0) return "감소";

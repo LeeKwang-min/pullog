@@ -59,7 +59,6 @@ function DayRecord() {
         <DayRecordAnalyze today={todayData.today} prev={todayData.prev} />
       )}
       <DayRecordStatistics today={todayData.today} />
-      <DayRecordSetList today={todayData.today} />
     </section>
   );
 }
