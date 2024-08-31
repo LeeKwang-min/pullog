@@ -34,7 +34,7 @@ function DayRecordAnalyze({ today, prev }: IProps) {
         title="철봉 기록 달력 페이지 본문 - 선택한 날짜의 기록과 최근 입력된 기록 분석"
         step={3}
       />
-      <div className="w-full flex flex-col">
+      <div className="w-full flex flex-col gap-2">
         <h3 className="flex items-center gap-1 font-bold text-xl">
           오늘의 분석
           <TrendingUp />
