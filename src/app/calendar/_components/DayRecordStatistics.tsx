@@ -1,5 +1,5 @@
 import ScreenReaderTitle from "@/components/common/ScreenReaderTitle";
-import { calcTodayTotalCount, calcTodayTotalTime } from "../_utils/dayRecord";
+import { calcTotalCount, calcTotalTime } from "../_utils/dayRecord";
 import { IPullupData } from "@/@types/pullup";
 import DayRecordSectionCard from "./DayRecordSectionCard";
 
@@ -16,9 +16,7 @@ function DayRecordStatistics({ today }: IProps) {
       />
       <h3 className="font-bold text-lg">오늘의 통계</h3>
       <div>
-        <span>
-          오늘 수행한 총 횟수: {calcTodayTotalCount(today.setData)} 회
-        </span>
+        <span>오늘 수행한 총 횟수: {calcTotalCount(today.setData)} 회</span>
       </div>
       <div>
         <TotalTime today={today} />
@@ -30,7 +28,7 @@ function DayRecordStatistics({ today }: IProps) {
 export default DayRecordStatistics;
 
 function TotalTime({ today }: IProps) {
-  const totalSecond = calcTodayTotalTime(today.setData);
+  const totalSecond = calcTotalTime(today.setData);
 
   return (
     <span className="flex items-center gap-1">
