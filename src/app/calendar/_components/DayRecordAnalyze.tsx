@@ -1,8 +1,6 @@
 import { IPullupData } from "@/@types/pullup";
 import ScreenReaderTitle from "@/components/common/ScreenReaderTitle";
 import {
-  calcDiffBestCountBetweenSet,
-  calcDiffTotalCountBetweenSet,
   calcMaxCount,
   calcTotalCount,
   getChartColor,
@@ -11,14 +9,7 @@ import {
 import DayRecordSectionCard from "./DayRecordSectionCard";
 
 import { TrendingUp } from "lucide-react";
-import {
-  Bar,
-  BarChart,
-  CartesianGrid,
-  LabelList,
-  XAxis,
-  YAxis,
-} from "recharts";
+import { Bar, BarChart, LabelList, XAxis, YAxis } from "recharts";
 
 import {
   ChartConfig,
@@ -29,6 +20,7 @@ import {
 import { useMemo } from "react";
 import { format } from "date-fns";
 import { cn, normalizeNumber } from "@/lib/utils";
+import { Separator } from "@/components/ui/separator";
 
 interface IProps {
   today: IPullupData;
@@ -43,13 +35,18 @@ function DayRecordAnalyze({ today, prev }: IProps) {
         step={3}
       />
       <div className="w-full flex flex-col">
-        <h3 className="font-bold text-xl">오늘의 분석</h3>
+        <h3 className="flex items-center gap-1 font-bold text-xl">
+          오늘의 분석
+          <TrendingUp />
+        </h3>
         <span className="flex items-center gap-1 text-slate-700">
           지난 <p className="font-bold">{format(prev.date, "M월 d일")}</p>기록에
           비해
         </span>
       </div>
+      <Separator />
       <MaxCount today={today} prev={prev} />
+      <Separator />
       <TotalCount today={today} prev={prev} />
     </DayRecordSectionCard>
   );
