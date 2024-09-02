@@ -287,6 +287,14 @@ export const TMP_DATA_SET: IPullupData[] = [
         count: 5,
         second: 28,
       },
+      {
+        count: 6,
+        second: 28,
+      },
+      {
+        count: 5,
+        second: 28,
+      },
     ],
     snsLink: "",
   },
@@ -301,6 +309,18 @@ export const TMP_DATA_SET: IPullupData[] = [
       {
         count: 5,
         second: 29,
+      },
+      {
+        count: 5,
+        second: 32,
+      },
+      {
+        count: 5,
+        second: 31,
+      },
+      {
+        count: 5,
+        second: 28,
       },
     ],
     snsLink: "",
