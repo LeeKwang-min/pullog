@@ -10,6 +10,7 @@ import DayRecordEmpty from "./DayRecordEmpty";
 import DayRecordAnalyze from "./DayRecordAnalyze";
 import DayRecordStatistics from "./DayRecordStatistics";
 import DayRecordSetList from "./DayRecordSetList";
+import { ImageDownIcon } from "lucide-react";
 
 interface IPullupDataWithPrev {
   today: IPullupData | null;
@@ -55,6 +56,14 @@ function DayRecord() {
         title="철봉 기록 달력 페이지 본문 - 선택한 날짜 정보"
         step={2}
       />
+      <span className="w-full flex justify-center items-center gap-1 text-sm text-slate-500">
+        <ImageDownIcon size={12} />{" "}
+        <span className="flex items-center">
+          <p className="font-bold">분석</p>과 <p className="font-bold">통계</p>
+          는 길게 누르면 이미지로 저장돼요!
+        </span>{" "}
+        <ImageDownIcon size={12} />
+      </span>
       {todayData.prev && (
         <DayRecordAnalyze today={todayData.today} prev={todayData.prev} />
       )}
