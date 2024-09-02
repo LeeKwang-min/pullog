@@ -14,7 +14,9 @@ interface IDateContextProps {
   getDateFormat: (date: Date) => string;
 }
 
-const DateContext = createContext<IDateContextProps | undefined>(undefined);
+const PullupDateContext = createContext<IDateContextProps | undefined>(
+  undefined
+);
 
 const DAY_STRING = ["일", "월", "화", "수", "목", "금", "토"];
 
@@ -46,7 +48,7 @@ export const DateProvider = ({ children }: { children: React.ReactNode }) => {
   };
 
   return (
-    <DateContext.Provider
+    <PullupDateContext.Provider
       value={{
         date,
         setDate,
@@ -60,12 +62,12 @@ export const DateProvider = ({ children }: { children: React.ReactNode }) => {
       }}
     >
       {children}
-    </DateContext.Provider>
+    </PullupDateContext.Provider>
   );
 };
 
-export const useDateData = () => {
-  const context = useContext(DateContext);
+export const usePullupDateData = () => {
+  const context = useContext(PullupDateContext);
   if (!context) {
     throw new Error("useChannelMetaData must be used within a ChannelProvider");
   }

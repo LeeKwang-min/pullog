@@ -7,12 +7,13 @@ import { CirclePlusIcon } from "lucide-react";
 import { useEffect, useRef, useState } from "react";
 
 import { Card, CardContent, CardHeader } from "@/components/ui/card";
-import { useDateData } from "@/context/dateContext";
+import { usePullupDateData } from "@/context/PullupDateContext";
 import LogHeader from "./_components/LogHeader";
 import LogSetDataInputCard from "./_components/LogSetDataInputCard";
 
 function Log() {
-  const { date, setDate, getYear, getMonth, getDay, getDayStr } = useDateData();
+  const { date, setDate, getYear, getMonth, getDay, getDayStr } =
+    usePullupDateData();
   const snsLinkRef = useRef<HTMLInputElement>(null);
   const [pullupData, setPullupData] = useState<ISPullupSetData[]>([
     {

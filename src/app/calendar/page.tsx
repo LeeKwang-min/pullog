@@ -5,11 +5,10 @@ import { ChevronLeftIcon, PencilIcon } from "lucide-react";
 import { useRouter } from "next/navigation";
 import Calendar from "./_components/Calendar";
 import DayRecord from "./_components/DayRecord";
-import { useState } from "react";
-import { useDateData } from "@/context/dateContext";
+import { usePullupDateData } from "@/context/PullupDateContext";
 
 function LogCalendar() {
-  const { setDate, selectDate } = useDateData();
+  const { setDate, selectDate } = usePullupDateData();
 
   const router = useRouter();
 

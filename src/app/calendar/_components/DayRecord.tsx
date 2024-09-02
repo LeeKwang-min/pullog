@@ -3,7 +3,7 @@
 import { IPullupData } from "@/@types/pullup";
 import ScreenReaderTitle from "@/components/common/ScreenReaderTitle";
 import { TMP_DATA_SET } from "@/const/tmpData";
-import { useDateData } from "@/context/dateContext";
+import { usePullupDateData } from "@/context/PullupDateContext";
 import { format } from "date-fns";
 import { useEffect, useState } from "react";
 import DayRecordEmpty from "./DayRecordEmpty";
@@ -17,7 +17,7 @@ interface IPullupDataWithPrev {
 }
 
 function DayRecord() {
-  const { selectDate: date, getMonth, getDay } = useDateData();
+  const { selectDate: date, getMonth, getDay } = usePullupDateData();
   const [todayData, setTodayData] = useState<IPullupDataWithPrev>({
     today: null,
     prev: null,

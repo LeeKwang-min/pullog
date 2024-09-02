@@ -1,7 +1,7 @@
 "use client";
 
 import ScreenReaderTitle from "@/components/common/ScreenReaderTitle";
-import { useDateData } from "@/context/dateContext";
+import { usePullupDateData } from "@/context/PullupDateContext";
 import { cn } from "@/lib/utils";
 import {
   addDays,
@@ -132,7 +132,7 @@ function CalendarDays({
 interface IProps {}
 
 function Calendar({}: IProps) {
-  const { date, selectDate, setSelectDate } = useDateData();
+  const { date, selectDate, setSelectDate } = usePullupDateData();
   const [viewDate, setViewDate] = useState<Date>(date);
 
   return (
