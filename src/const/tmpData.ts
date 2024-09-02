@@ -264,4 +264,45 @@ export const TMP_DATA_SET: IPullupData[] = [
     ],
     snsLink: "",
   },
+  {
+    date: "2024-08-27",
+    day: "TUESDAY",
+    setData: [
+      {
+        count: 10,
+        second: 33,
+      },
+    ],
+    snsLink: "",
+  },
+  {
+    date: "2024-08-29",
+    day: "THURSDAY",
+    setData: [
+      {
+        count: 15,
+        second: 42,
+      },
+      {
+        count: 5,
+        second: 28,
+      },
+    ],
+    snsLink: "",
+  },
+  {
+    date: "2024-09-02",
+    day: "MONDAY",
+    setData: [
+      {
+        count: 17,
+        second: 44,
+      },
+      {
+        count: 5,
+        second: 29,
+      },
+    ],
+    snsLink: "",
+  },
 ];
