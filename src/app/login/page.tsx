@@ -8,10 +8,18 @@ import {
   CardHeader,
   CardTitle,
 } from "@/components/ui/card";
+import { createClient } from "@/lib/supabase/client";
 
 function Login() {
-  const handleGooglLogin = () => {
-    alert("google 로그인");
+  const supabase = createClient();
+
+  const handleGooglLogin = async () => {
+    const { data, error } = await supabase.auth.signInWithOAuth({
+      provider: "google",
+      options: {
+        redirectTo: process.env.NEXT_PUBLIC_AUTH_REDIRECT_TO,
+      },
+    });
   };
 
   return (

@@ -14,12 +14,20 @@ import { CalendarDaysIcon } from "lucide-react";
 import Image from "next/image";
 import { useRouter } from "next/navigation";
 import LogoImg from "@/assets/images/pullog_logo.jpeg";
+import { Button } from "@/components/ui/button";
+import { createClient } from "@/lib/supabase/client";
 
 function MainHeader() {
+  const supabase = createClient();
   const router = useRouter();
 
   const handleCalendarBtn = () => {
     router.push("/calendar");
+  };
+
+  const handleLogout = async () => {
+    await supabase.auth.signOut();
+    window.location.reload();
   };
 
   return (
@@ -37,7 +45,9 @@ function MainHeader() {
           <SheetHeader>
             <SheetTitle>내정보</SheetTitle>
             <SheetDescription>
-              이런 저런 내용들이 들어갈 예정입니다.
+              <Button variant="outline" onClick={handleLogout}>
+                로그아웃
+              </Button>
             </SheetDescription>
           </SheetHeader>
         </SheetContent>
