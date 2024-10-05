@@ -11,7 +11,6 @@ export async function middleware(req: NextRequest) {
   const supabase = createClient();
 
   const user = await supabase.auth.getUser();
-  console.log(user.data.user?.email);
   const currentPath: string = req.nextUrl.pathname;
 
   if (!user.data.user && protectedRoutes.includes(currentPath)) {

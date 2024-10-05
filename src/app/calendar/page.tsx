@@ -6,11 +6,24 @@ import { useRouter } from "next/navigation";
 import Calendar from "./_components/Calendar";
 import DayRecord from "./_components/DayRecord";
 import { usePullupDateData } from "@/context/PullupDateContext";
+import { useEffect, useState } from "react";
+import { IPullupData } from "@/@types/pullup";
+import { getPullupRecord } from "@/apis/pullup_record";
 
 function LogCalendar() {
   const { setDate, selectDate } = usePullupDateData();
+  const [pullupData, setPullupData] = useState<IPullupData[]>([]);
 
   const router = useRouter();
+
+  const handleAllRecord = async () => {
+    const data = await getPullupRecord();
+    setPullupData(data as IPullupData[]);
+  };
+
+  useEffect(() => {
+    handleAllRecord();
+  }, []);
 
   const handleBackBtn = () => {
     router.push("/");
@@ -31,7 +44,7 @@ function LogCalendar() {
         <PencilIcon onClick={() => handleEditBtn()} size={24} />
       </section>
       <Calendar />
-      <DayRecord />
+      <DayRecord pullupData={pullupData} />
     </main>
   );
 }

@@ -56,7 +56,7 @@ function Log() {
               return (
                 <>
                   <LogSetDataInputCard
-                    key={idx}
+                    key={`set-${idx}-${count}-${second}`}
                     setPullupData={setPullupData}
                     count={count}
                     second={second}
