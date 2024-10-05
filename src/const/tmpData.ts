@@ -352,4 +352,287 @@ export const TMP_DATA_SET: IPullupData[] = [
     ],
     snsLink: "",
   },
+  {
+    date: "2024-09-04",
+    day: "WEDNESDAY",
+    setData: [
+      {
+        count: 5,
+        second: 15,
+      },
+      {
+        count: 18,
+        second: 44,
+      },
+      {
+        count: 7,
+        second: 29,
+      },
+      {
+        count: 5,
+        second: 25,
+      },
+      {
+        count: 7,
+        second: 30,
+      },
+      {
+        count: 6,
+        second: 28,
+      },
+      {
+        count: 5,
+        second: 25,
+      },
+    ],
+    snsLink: "",
+  },
+  {
+    date: "2024-09-09",
+    day: "MONDAY",
+    setData: [
+      {
+        count: 5,
+        second: 15,
+      },
+      {
+        count: 16,
+        second: 41,
+      },
+      {
+        count: 7,
+        second: 29,
+      },
+      {
+        count: 6,
+        second: 25,
+      },
+      {
+        count: 7,
+        second: 30,
+      },
+    ],
+    snsLink: "",
+  },
+  {
+    date: "2024-09-10",
+    day: "TUESDAY",
+    setData: [
+      {
+        count: 3,
+        second: 10,
+      },
+      {
+        count: 15,
+        second: 39,
+      },
+      {
+        count: 5,
+        second: 25,
+      },
+      {
+        count: 7,
+        second: 32,
+      },
+    ],
+    snsLink: "",
+  },
+  {
+    date: "2024-09-11",
+    day: "WEDNESDAY",
+    setData: [
+      {
+        count: 3,
+        second: 10,
+      },
+      {
+        count: 15,
+        second: 39,
+      },
+      {
+        count: 3,
+        second: 15,
+      },
+      {
+        count: 3,
+        second: 15,
+      },
+      {
+        count: 5,
+        second: 20,
+      },
+    ],
+    snsLink: "",
+  },
+  {
+    date: "2024-09-23",
+    day: "MONDAY",
+    setData: [
+      {
+        count: 3,
+        second: 10,
+      },
+      {
+        count: 17,
+        second: 42,
+      },
+      {
+        count: 7,
+        second: 25,
+      },
+      {
+        count: 5,
+        second: 20,
+      },
+      {
+        count: 5,
+        second: 20,
+      },
+      {
+        count: 5,
+        second: 20,
+      },
+      {
+        count: 5,
+        second: 20,
+      },
+    ],
+    snsLink: "",
+  },
+  {
+    date: "2024-09-24",
+    day: "TUESDAY",
+    setData: [
+      {
+        count: 7,
+        second: 18,
+      },
+      {
+        count: 5,
+        second: 13,
+      },
+      {
+        count: 5,
+        second: 17,
+      },
+      {
+        count: 10,
+        second: 25,
+      },
+      {
+        count: 15,
+        second: 36,
+      },
+      {
+        count: 7,
+        second: 20,
+      },
+      {
+        count: 7,
+        second: 20,
+      },
+      {
+        count: 5,
+        second: 15,
+      },
+    ],
+    snsLink: "",
+  },
+  {
+    date: "2024-09-25",
+    day: "WEDNESDAY",
+    setData: [
+      {
+        count: 3,
+        second: 10,
+      },
+      {
+        count: 12,
+        second: 33,
+      },
+      {
+        count: 5,
+        second: 17,
+      },
+      {
+        count: 5,
+        second: 17,
+      },
+      {
+        count: 5,
+        second: 17,
+      },
+      {
+        count: 4,
+        second: 12,
+      },
+      {
+        count: 3,
+        second: 10,
+      },
+      {
+        count: 3,
+        second: 10,
+      },
+    ],
+    snsLink: "",
+  },
+  {
+    date: "2024-09-26",
+    day: "THURSDAY",
+    setData: [
+      {
+        count: 3,
+        second: 10,
+      },
+      {
+        count: 15,
+        second: 37,
+      },
+      {
+        count: 5,
+        second: 15,
+      },
+      {
+        count: 5,
+        second: 15,
+      },
+      {
+        count: 5,
+        second: 15,
+      },
+    ],
+    snsLink: "",
+  },
+  {
+    date: "2024-10-02",
+    day: "WEDNESDAY",
+    setData: [
+      {
+        count: 5,
+        second: 15,
+      },
+      {
+        count: 17,
+        second: 41,
+      },
+      {
+        count: 5,
+        second: 15,
+      },
+      {
+        count: 5,
+        second: 15,
+      },
+      {
+        count: 5,
+        second: 15,
+      },
+      {
+        count: 5,
+        second: 15,
+      },
+    ],
+    snsLink: "",
+  },
 ];

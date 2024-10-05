@@ -1,7 +1,9 @@
-import { ISPullupSetData } from "@/@types/pullup";
+import { RotateCcw, Trash2 } from "lucide-react";
+import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
-import { RefreshCcwIcon, Trash2Icon } from "lucide-react";
+
+import { ISPullupSetData } from "@/@types/pullup";
 import { Dispatch, SetStateAction } from "react";
 
 interface IProps {
@@ -47,67 +49,56 @@ function LogSetDataInputCard({
   };
 
   return (
-    <div className="flex flex-col gap-2 w-full border py-2 px-2 rounded-md">
-      <div className="grid grid-cols-6 items-center">
-        <Label
-          htmlFor={`${setNumber + 1}set`}
-          className="text-sm font-semibold"
-        >
-          {setNumber + 1} 세트
-        </Label>
-        <Input
-          id={`${setNumber + 1}set`}
-          type="number"
-          value={count || ""}
-          onChange={(e) =>
-            handleSetData("count", setNumber, Number(e.target.value))
-          }
-          className="h-8 text-sm col-span-2"
-        />
-        <Label
-          htmlFor={`${setNumber + 1}set`}
-          className="text-sm font-semibold px-2"
-        >
-          회
-        </Label>
-      </div>
-
-      <div className="grid grid-cols-6 items-center">
-        <Label
-          htmlFor={`${setNumber + 1}setSec`}
-          className="text-sm font-semibold"
-        >
-          시간
-        </Label>
-        <Input
-          id={`${setNumber + 1}setSec`}
-          type="number"
-          value={second || ""}
-          onChange={(e) =>
-            handleSetData("second", setNumber, Number(e.target.value))
-          }
-          className="h-8 text-sm col-span-2"
-        />
-        <Label
-          htmlFor={`${setNumber + 1}setSec`}
-          className="text-sm font-semibold px-2"
-        >
-          초
-        </Label>
-
-        <div className="flex items-center gap-2 col-span-2 justify-end">
-          <button
+    <div className="space-y-2">
+      <div className="flex items-center justify-between">
+        <Label className="text-sm font-medium">세트 {setNumber + 1}</Label>
+        <div className="flex space-x-1">
+          <Button
+            variant="outline"
+            size="icon"
             onClick={() => refreshSetData(setNumber)}
-            className="rounded-full border px-1 py-1"
+            className="h-8 w-8"
           >
-            <RefreshCcwIcon color="#71b0c2" size={18} />
-          </button>
-          <button
+            <RotateCcw className="h-4 w-4" />
+          </Button>
+          <Button
+            variant="outline"
+            size="icon"
             onClick={() => deleteSet(setNumber)}
-            className="rounded-full border px-1 py-1"
+            className="h-8 w-8"
           >
-            <Trash2Icon color="#ff8585" size={18} />
-          </button>
+            <Trash2 className="h-4 w-4" />
+          </Button>
+        </div>
+      </div>
+      <div className="grid grid-cols-2 gap-2">
+        <div>
+          <Label htmlFor={`reps-${setNumber}`} className="sr-only">
+            횟수
+          </Label>
+          <Input
+            id={`reps-${setNumber}`}
+            value={count || ""}
+            onChange={(e) =>
+              handleSetData("count", setNumber, Number(e.target.value))
+            }
+            placeholder="횟수"
+            className="w-full"
+          />
+        </div>
+        <div>
+          <Label htmlFor={`time-${setNumber}`} className="sr-only">
+            시간(초)
+          </Label>
+          <Input
+            id={`time-${setNumber}`}
+            value={second || ""}
+            onChange={(e) =>
+              handleSetData("second", setNumber, Number(e.target.value))
+            }
+            placeholder="시간(초)"
+            className="w-full"
+          />
         </div>
       </div>
     </div>
