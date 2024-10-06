@@ -10,7 +10,7 @@ interface IProps {
   setPullupData: Dispatch<SetStateAction<ISPullupSetData[]>>;
   setNumber: number;
   count: number;
-  second?: number;
+  second?: number | null;
 }
 
 function LogSetDataInputCard({

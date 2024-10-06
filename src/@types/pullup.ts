@@ -15,10 +15,11 @@ export type TPullupSnsLink = {
 export interface ISPullupSetData {
   id?: number;
   count: number;
-  second?: number;
+  second?: number | null;
 }
 
 export interface IPullupData {
+  id?: number;
   date: string;
   day: TDayConst;
   setData: ISPullupSetData[];
@@ -28,4 +29,9 @@ export interface IPullupData {
 export interface IGetPullupResponse {
   status: number;
   data: IPullupData[];
+}
+
+export interface IPullupDataWithPrev {
+  today: IPullupData | null;
+  prev: IPullupData | null;
 }

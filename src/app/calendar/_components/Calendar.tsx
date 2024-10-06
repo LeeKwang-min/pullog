@@ -20,7 +20,7 @@ import {
 import { ChevronLeftIcon, ChevronRightIcon } from "lucide-react";
 import { Dispatch, SetStateAction, useState } from "react";
 
-const DATE_STR_LIST = ["월", "화", "수", "목", "금", "토", "일"];
+const DATE_STR_LIST = ["일", "월", "화", "수", "목", "금", "토"];
 
 interface ICalendarHeaderProps {
   viewDate: Date;
@@ -63,7 +63,11 @@ function CalendarDaysStr() {
         {DATE_STR_LIST.map((dateStr, idx) => (
           <div
             key={dateStr}
-            className="w-10 h-10 flex items-center justify-center"
+            className={cn(
+              "w-10 h-10 flex items-center justify-center",
+              idx === 0 && "text-red-500",
+              idx === 6 && "text-blue-500"
+            )}
           >
             {dateStr}
           </div>

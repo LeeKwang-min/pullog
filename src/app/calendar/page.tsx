@@ -1,29 +1,36 @@
 "use client";
 
 import ScreenReaderTitle from "@/components/common/ScreenReaderTitle";
-import { ChevronLeftIcon, PencilIcon } from "lucide-react";
+import { ChevronLeftIcon, PencilIcon, Trash2Icon } from "lucide-react";
 import { useRouter } from "next/navigation";
 import Calendar from "./_components/Calendar";
 import DayRecord from "./_components/DayRecord";
 import { usePullupDateData } from "@/context/PullupDateContext";
 import { useEffect, useState } from "react";
 import { IPullupData } from "@/@types/pullup";
-import { getPullupRecord } from "@/apis/pullup_record";
+import { delPullupRecord, getPullupRecord } from "@/apis/pullup_record";
+import Loading from "@/components/common/Loading";
+import { Button } from "@/components/ui/button";
+import { findTodayDataId } from "@/lib/utils";
 
 function LogCalendar() {
-  const { setDate, selectDate } = usePullupDateData();
+  const { setDate, selectDate, isRefresh, setIsRefresh } = usePullupDateData();
   const [pullupData, setPullupData] = useState<IPullupData[]>([]);
+  const [isLoading, setIsLoading] = useState<boolean>(true);
+  const selectDateId = findTodayDataId(selectDate, pullupData);
 
   const router = useRouter();
 
   const handleAllRecord = async () => {
+    setIsLoading(true);
     const data = await getPullupRecord();
     setPullupData(data as IPullupData[]);
+    setIsLoading(false);
   };
 
   useEffect(() => {
     handleAllRecord();
-  }, []);
+  }, [isRefresh]);
 
   const handleBackBtn = () => {
     router.push("/");
@@ -34,15 +41,43 @@ function LogCalendar() {
     router.push("/log");
   };
 
+  const handleDeleteBtn = async () => {
+    if (selectDateId) {
+      const result = await delPullupRecord(selectDateId);
+      if (result) setIsRefresh((prev) => !prev);
+    }
+  };
+
+  if (isLoading) return <Loading />;
+
   return (
     <main className="relative w-full h-full flex flex-col px-4 py-4 gap-4">
       <ScreenReaderTitle title="철봉 기록 달력 페이지" />
-      <section className="w-full flex items-center justify-between">
-        <ScreenReaderTitle title="철봉 기록 달력 페이지 헤더" step={2} />
-        <ChevronLeftIcon onClick={() => handleBackBtn()} size={24} />
-        <h3 className="font-bold">풀업 달력</h3>
-        <PencilIcon onClick={() => handleEditBtn()} size={24} />
-      </section>
+      <header className="flex items-center bg-background relative">
+        <Button
+          variant="ghost"
+          size="icon"
+          onClick={handleBackBtn}
+          className="absolute left-0"
+        >
+          <ChevronLeftIcon className="h-6 w-6" />
+          <span className="sr-only">뒤로 가기</span>
+        </Button>
+        <h1 className="text-lg font-semibold w-full text-center">풀업 달력</h1>
+        <div className="flex items-center space-x-1 absolute right-0">
+          {selectDateId && (
+            <Button variant="ghost" size="icon" onClick={handleDeleteBtn}>
+              <Trash2Icon size={20} color="#f87171" />
+              <span className="sr-only">삭제</span>
+            </Button>
+          )}
+          <Button variant="ghost" size="icon" onClick={handleEditBtn}>
+            <PencilIcon size={20} />
+            <span className="sr-only">수정</span>
+          </Button>
+        </div>
+      </header>
+
       <Calendar />
       <DayRecord pullupData={pullupData} />
     </main>

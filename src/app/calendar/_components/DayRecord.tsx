@@ -1,6 +1,6 @@
 "use client";
 
-import { IPullupData } from "@/@types/pullup";
+import { IPullupData, IPullupDataWithPrev } from "@/@types/pullup";
 import ScreenReaderTitle from "@/components/common/ScreenReaderTitle";
 import { usePullupDateData } from "@/context/PullupDateContext";
 import { format } from "date-fns";
@@ -8,13 +8,8 @@ import { useEffect, useState } from "react";
 import DayRecordEmpty from "./DayRecordEmpty";
 import DayRecordAnalyze from "./DayRecordAnalyze";
 import DayRecordStatistics from "./DayRecordStatistics";
-import DayRecordSetList from "./DayRecordSetList";
 import { ImageDownIcon } from "lucide-react";
-
-interface IPullupDataWithPrev {
-  today: IPullupData | null;
-  prev: IPullupData | null;
-}
+import { findDataWithPrevious } from "@/lib/utils";
 
 interface IProps {
   pullupData: IPullupData[];
@@ -27,28 +22,10 @@ function DayRecord({ pullupData }: IProps) {
     prev: null,
   });
 
-  const findDataWithPrevious = (
-    date: string,
-    dataSet: IPullupData[]
-  ): IPullupDataWithPrev => {
-    const index = dataSet.findIndex((data) => data.date === date);
-    if (index === -1) {
-      return { today: null, prev: null };
-    }
-
-    const today = dataSet[index];
-    const prev = index > 0 ? dataSet[index - 1] : null;
-
-    return { today, prev };
-  };
-
   useEffect(() => {
-    const todayPullupData = findDataWithPrevious(
-      format(date, "yyyy-MM-dd"),
-      pullupData
-    );
+    const todayPullupData = findDataWithPrevious(date, pullupData);
     setTodayData(todayPullupData);
-  }, [date]);
+  }, [date, pullupData]);
 
   if (!todayData.today)
     return <DayRecordEmpty month={getMonth(date)} day={getDay(date)} />;

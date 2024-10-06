@@ -11,16 +11,34 @@ import { usePullupDateData } from "@/context/PullupDateContext";
 import LogHeader from "./_components/LogHeader";
 import LogSetDataInputCard from "./_components/LogSetDataInputCard";
 import { Separator } from "@/components/ui/separator";
+import { getDayPullupRecord } from "@/apis/pullup_record";
 
 function Log() {
-  const { date, setDate, getYear, getMonth, getDay, getDayStr } =
-    usePullupDateData();
+  const {
+    date,
+    getYear,
+    getMonth,
+    getDay,
+    getDayStr,
+    getDayEngStr,
+    setIsRefresh,
+  } = usePullupDateData();
   const snsLinkRef = useRef<HTMLInputElement>(null);
   const [pullupData, setPullupData] = useState<ISPullupSetData[]>([
     {
       count: 0,
     },
   ]);
+
+  const handleCurDayPullupData = async () => {
+    const curPullupData = await getDayPullupRecord(date);
+    if (curPullupData && curPullupData[0].setData)
+      setPullupData(curPullupData[0].setData);
+  };
+
+  useEffect(() => {
+    handleCurDayPullupData();
+  }, [date]);
 
   const addSet = () => {
     setPullupData((prev) => [
@@ -34,7 +52,12 @@ function Log() {
   return (
     <main className="relative w-full h-full flex flex-col px-4 py-4 gap-4">
       <ScreenReaderTitle title="철봉 기록 입력 페이지" />
-      <LogHeader pullupData={pullupData} />
+      <LogHeader
+        date={date}
+        pullupData={pullupData}
+        getDayEngStr={getDayEngStr}
+        setIsRefresh={setIsRefresh}
+      />
 
       <Card className="w-full grow relative flex flex-col overflow-scroll">
         <CardHeader className="w-full flex flex-col items-center">
@@ -54,16 +77,15 @@ function Log() {
               const { count, second } = pullup;
 
               return (
-                <>
+                <div key={`set-${idx}`}>
                   <LogSetDataInputCard
-                    key={`set-${idx}-${count}-${second}`}
                     setPullupData={setPullupData}
                     count={count}
                     second={second}
                     setNumber={idx}
                   />
                   <Separator className="opacity-30" />
-                </>
+                </div>
               );
             })}
           </div>
