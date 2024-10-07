@@ -12,7 +12,7 @@ export const normalizeNumber = (value: number): number => {
 };
 
 export const findTodayDataId = (date: Date, dataSet: IPullupData[]) => {
-  const todayData = dataSet.filter(
+  const todayData = (dataSet || []).filter(
     (data) => data.date === format(date, "yyyy-MM-dd")
   );
   if (!todayData.length) return null;
@@ -23,7 +23,7 @@ export const findDataWithPrevious = (
   date: Date,
   dataSet: IPullupData[]
 ): IPullupDataWithPrev => {
-  const index = dataSet.findIndex(
+  const index = (dataSet || []).findIndex(
     (data) => data.date === format(date, "yyyy-MM-dd")
   );
   if (index === -1) {
