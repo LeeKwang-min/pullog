@@ -9,7 +9,7 @@ import { usePullupDateData } from "@/context/PullupDateContext";
 import { useEffect, useState } from "react";
 import { IPullupData } from "@/@types/pullup";
 import { delPullupRecord, getPullupRecord } from "@/apis/pullup_record";
-import Loading from "@/components/common/Loading";
+import LoadingAnimation from "@/components/common/LoadingAnimation";
 import { Button } from "@/components/ui/button";
 import { findTodayDataId } from "@/lib/utils";
 
@@ -48,7 +48,7 @@ function LogCalendar() {
     }
   };
 
-  if (isLoading) return <Loading />;
+  if (isLoading) return <LoadingAnimation />;
 
   return (
     <main className="relative w-full h-full flex flex-col px-4 py-4 gap-4">

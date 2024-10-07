@@ -1,6 +1,7 @@
 import { IPullupData } from "@/@types/pullup";
 import { Database } from "@/@types/supabase";
 import { createClient } from "@/lib/supabase/client";
+import { createClient as createServerClient } from "@/lib/supabase/server";
 import { format } from "date-fns";
 
 type TTable = Database["public"]["Tables"];
@@ -62,6 +63,50 @@ export const getPullupRecord = async () => {
   } catch (e) {
     console.error("Error fetching data:", e);
     return null;
+  }
+};
+
+export const getPullupRecordSever = async () => {
+  const supabase = createServerClient();
+  const user = await supabase.auth.getUser();
+  const userId = user.data.user?.id || "";
+
+  try {
+    const { data: records, error: recordError } = await supabase
+      .from("pullup_record")
+      .select("*")
+      .eq("user_id", userId)
+      .order("date", {
+        ascending: false,
+      });
+
+    if (recordError) {
+      throw recordError;
+    }
+
+    if (!records || records.length === 0) {
+      console.log("No records found for this user");
+      return [];
+    }
+
+    // 2. 조회된 기록의 id 목록 추출
+    const recordIds = records.map((record) => record.id);
+
+    // 3. pullup_set 테이블에서 기록 id에 해당하는 세트 조회
+    const { data: sets, error: setError } = await supabase
+      .from("pullup_set")
+      .select("*")
+      .in("record_id", recordIds);
+
+    if (setError) {
+      throw setError;
+    }
+
+    // 4. 조회된 데이터 반환
+    return handleDataForClient(records, sets) as IPullupData[];
+  } catch (e) {
+    console.error("Error fetching data:", e);
+    return [];
   }
 };
 

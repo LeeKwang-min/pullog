@@ -16,6 +16,7 @@ import { useRouter } from "next/navigation";
 import LogoImg from "@/assets/images/pullog_logo.jpeg";
 import { Button } from "@/components/ui/button";
 import { createClient } from "@/lib/supabase/client";
+import { useEffect, useState } from "react";
 
 function MainHeader() {
   const supabase = createClient();

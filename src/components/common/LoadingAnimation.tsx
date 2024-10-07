@@ -1,6 +1,6 @@
 import { ClockLoader } from "react-spinners";
 
-function Loading() {
+function LoadingAnimation() {
   return (
     <div className="absolute top-0 z-50 flex h-full w-full flex-col items-center justify-center gap-4 bg-gray-600 bg-opacity-50">
       <ClockLoader />
@@ -20,4 +20,4 @@ function Loading() {
   );
 }
 
-export default Loading;
+export default LoadingAnimation;
