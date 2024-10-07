@@ -8,7 +8,7 @@ const publicRoutes = ["/login"]; // 로그인이 되면 접근할 수 없는 페
 export async function middleware(req: NextRequest) {
   await updateSession(req);
 
-  const supabase = createClient();
+  const supabase = await createClient();
 
   const user = await supabase.auth.getUser();
   const currentPath: string = req.nextUrl.pathname;

@@ -67,7 +67,7 @@ export const getPullupRecord = async () => {
 };
 
 export const getPullupRecordSever = async () => {
-  const supabase = createServerClient();
+  const supabase = await createServerClient();
   const user = await supabase.auth.getUser();
   const userId = user.data.user?.id || "";
 
