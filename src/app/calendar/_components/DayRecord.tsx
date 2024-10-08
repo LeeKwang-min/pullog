@@ -16,7 +16,7 @@ interface IProps {
 }
 
 function DayRecord({ pullupData }: IProps) {
-  const { selectDate: date, getMonth, getDay } = usePullupDateData();
+  const { selectDate: date, getMonth, getDay, setDate } = usePullupDateData();
   const [todayData, setTodayData] = useState<IPullupDataWithPrev>({
     today: null,
     prev: null,

@@ -1,3 +1,4 @@
+"use client";
 import { CalendarX2, Dumbbell } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import {
@@ -7,14 +8,23 @@ import {
   CardHeader,
   CardTitle,
 } from "@/components/ui/card";
-import Link from "next/link";
+import { useRouter } from "next/navigation";
 
 interface IProps {
+  date: Date;
   month: number;
   day: number;
+  setDate: React.Dispatch<React.SetStateAction<Date>>;
 }
 
-function DayRecordEmpty({ month, day }: IProps) {
+function DayRecordEmpty({ month, day, date, setDate }: IProps) {
+  const router = useRouter();
+
+  const handleRecordBtn = () => {
+    setDate(date);
+    router.push("/log");
+  };
+
   return (
     <Card className="w-full  mx-auto">
       <CardHeader className="text-center">
@@ -30,12 +40,10 @@ function DayRecordEmpty({ month, day }: IProps) {
         </p>
       </CardContent>
       <CardFooter className="flex justify-center">
-        <Link href="/log">
-          <Button className="flex items-center">
-            <Dumbbell className="w-4 h-4 mr-2" />
-            운동 기록하기
-          </Button>
-        </Link>
+        <Button onClick={handleRecordBtn} className="flex items-center">
+          <Dumbbell className="w-4 h-4 mr-2" />
+          운동 기록하기
+        </Button>
       </CardFooter>
     </Card>
   );
