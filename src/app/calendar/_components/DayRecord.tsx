@@ -28,7 +28,14 @@ function DayRecord({ pullupData }: IProps) {
   }, [date, pullupData]);
 
   if (!todayData.today)
-    return <DayRecordEmpty month={getMonth(date)} day={getDay(date)} />;
+    return (
+      <DayRecordEmpty
+        date={date}
+        month={getMonth(date)}
+        day={getDay(date)}
+        setDate={setDate}
+      />
+    );
 
   return (
     <section className="w-full flex flex-col gap-3 py-2">
