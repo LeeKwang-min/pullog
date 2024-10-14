@@ -78,10 +78,14 @@ function LogSetDataInputCard({
           </Label>
           <Input
             id={`reps-${setNumber}`}
+            type="number"
+            inputMode="numeric"
+            pattern="^[0-9]*$"
             value={count || ""}
             onChange={(e) =>
               handleSetData("count", setNumber, Number(e.target.value))
             }
+            onWheel={(e) => e.currentTarget.blur()}
             placeholder="횟수"
             className="w-full"
           />
@@ -92,10 +96,14 @@ function LogSetDataInputCard({
           </Label>
           <Input
             id={`time-${setNumber}`}
+            type="number"
+            inputMode="numeric"
+            pattern="^[0-9]*$"
             value={second || ""}
             onChange={(e) =>
               handleSetData("second", setNumber, Number(e.target.value))
             }
+            onWheel={(e) => e.currentTarget.blur()}
             placeholder="시간(초)"
             className="w-full"
           />
