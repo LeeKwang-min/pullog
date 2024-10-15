@@ -35,7 +35,7 @@ function LogHeader({ date, pullupData, getDayEngStr, setIsRefresh }: IProps) {
     if (!data) console.log("error 발생! -> Toast 띄우기");
     else {
       setIsRefresh((prev) => !prev);
-      router.push("/calendar");
+      router.back();
     }
   };
 

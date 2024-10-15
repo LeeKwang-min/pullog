@@ -33,7 +33,7 @@ function LogCalendar() {
   }, [isRefresh]);
 
   const handleBackBtn = () => {
-    router.push("/");
+    router.back();
   };
 
   const handleEditBtn = () => {
