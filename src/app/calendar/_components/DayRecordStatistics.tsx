@@ -54,7 +54,7 @@ function StatisticsChart({ today }: IProps) {
   } satisfies ChartConfig;
 
   return (
-    <ChartContainer config={chartConfig} className="">
+    <ChartContainer config={chartConfig} className="min-h-[190px] aspect-auto">
       <RadialBarChart
         data={chartData}
         startAngle={0}

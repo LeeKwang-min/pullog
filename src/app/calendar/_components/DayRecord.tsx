@@ -51,10 +51,12 @@ function DayRecord({ pullupData }: IProps) {
         </span>{" "}
         <ImageDownIcon size={12} />
       </span>
-      {todayData.prev && (
-        <DayRecordAnalyze today={todayData.today} prev={todayData.prev} />
-      )}
-      <DayRecordStatistics today={todayData.today} />
+      <div className="flex flex-row gap-2 max-sm:flex-col">
+        {todayData.prev && (
+          <DayRecordAnalyze today={todayData.today} prev={todayData.prev} />
+        )}
+        <DayRecordStatistics today={todayData.today} />
+      </div>
     </section>
   );
 }
