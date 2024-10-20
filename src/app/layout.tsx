@@ -77,6 +77,12 @@ export const metadata: Metadata = {
   keywords: ["pullog", "pullup", "log", "철봉", "풀업", "기록", "분석"],
   creator: "Lee Kwangmin",
   publisher: "Lee Kwangmin",
+  verification: {
+    google: "9oM1xvolPm8iYB1TtZJN0qd4KnZ6zON12JxnxHVsZnQ",
+    other: {
+      "naver-site-verification": "bbf93537d2fc9a56ee212ce4503f22e4a08be078",
+    },
+  },
 };
 
 export const viewport: Viewport = {
