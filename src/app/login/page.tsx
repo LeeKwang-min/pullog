@@ -35,6 +35,7 @@ function Login() {
         <p className="text-muted-foreground">
           {`Pullog, 풀업 기록을 남겨보세요`}
         </p>
+        <p className="sr-only">{`pullog는 철봉/풀업에 진심인 사람들을 위한 철봉/풀업 기록을 할 수 있고, 기록한 데이터를 바탕으로 재밌는 분석 결과를 제공하는 서비스입니다. 구글 로그인을 통해 바로 사용해 보세요 꾸준히 개선중입니다!`}</p>
       </CardContent>
       <CardFooter>
         <Button
