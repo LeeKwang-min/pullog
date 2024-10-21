@@ -29,10 +29,10 @@ function Login() {
       </CardHeader>
       <CardContent className="text-center space-y-2">
         <p className="text-muted-foreground">
-          구글 계정으로 로그인하여 운동 기록을 시작하세요.
+          {`Pullup Log! Pullog! 풀업(철봉) 기록과 분석은 Pullog와 함께하세요`}
         </p>
         <p className="text-muted-foreground">
-          간편하고 안전한 방법으로 여러분의 여정을 기록할 수 있습니다.
+          {`구글 계정으로 로그인하여 Pullog, 풀업 기록을 시작하세요.`}
         </p>
       </CardContent>
       <CardFooter>
