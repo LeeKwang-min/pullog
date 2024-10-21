@@ -1,36 +1,31 @@
-This is a [Next.js](https://nextjs.org/) project bootstrapped with [`create-next-app`](https://github.com/vercel/next.js/tree/canary/packages/create-next-app).
+# Pullog
 
-## Getting Started
+Pullup Log! [Pullog](https://pullog.vercel.app/)!
+풀업에 진심인 사람(개발자)들을 위한 기록과 분석 서비스입니다.
+`모든 사람(개발자)이 풀업이 재밌어지는 그날까지 개선할 예정`
 
-First, run the development server:
+### Link
 
-```bash
-npm run dev
-# or
-yarn dev
-# or
-pnpm dev
-# or
-bun dev
-```
+1. [서비스 - Pullog](https://pullog.vercel.app/)
+2. [블로그 - Pullog 개선기](https://kwangbong.tistory.com/category/Dev/Project)
+3. [철발자 철스타](https://www.instagram.com/lee_kwangbong/)
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
+![Pullog 화면](image.png)
 
-You can start editing the page by modifying `app/page.tsx`. The page auto-updates as you edit the file.
+### Stack
 
-This project uses [`next/font`](https://nextjs.org/docs/basic-features/font-optimization) to automatically optimize and load Inter, a custom Google Font.
+[FE]
 
-## Learn More
+- Next.js (App Router)
+- Typescript
+- Shadcn ui
+- Tailwind css
 
-To learn more about Next.js, take a look at the following resources:
+[BE]
 
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
+- Supabase
 
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js/) - your feedback and contributions are welcome!
+[CI/CD]
 
-## Deploy on Vercel
-
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
-
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/deployment) for more details.
+- Git Action
+- Vercel
