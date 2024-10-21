@@ -28,11 +28,12 @@ function Login() {
         <CardTitle className="text-2xl font-bold text-center">PULLOG</CardTitle>
       </CardHeader>
       <CardContent className="text-center space-y-2">
+        <p className="text-muted-foreground">{`Pullup Log! Pullog!`}</p>
         <p className="text-muted-foreground">
-          {`Pullup Log! Pullog! 풀업(철봉) 기록과 분석은 Pullog와 함께하세요`}
+          {`풀업(철봉) 기록과 분석은 Pullog!`}
         </p>
         <p className="text-muted-foreground">
-          {`구글 계정으로 로그인하여 Pullog, 풀업 기록을 시작하세요.`}
+          {`Pullog, 풀업 기록을 남겨보세요`}
         </p>
       </CardContent>
       <CardFooter>
