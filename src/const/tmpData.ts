@@ -636,3 +636,234 @@ export const TMP_DATA_SET: IPullupData[] = [
     snsLink: "",
   },
 ];
+
+export const DATA_SET_FOR_UNAUTH: IPullupData[] = [
+  {
+    id: 1,
+    date: "2024-09-10",
+    day: "TUESDAY",
+    setData: [
+      {
+        count: 3,
+        second: 10,
+      },
+      {
+        count: 15,
+        second: 39,
+      },
+      {
+        count: 5,
+        second: 25,
+      },
+      {
+        count: 7,
+        second: 32,
+      },
+    ],
+    snsLink: "",
+  },
+  {
+    id: 2,
+    date: "2024-09-11",
+    day: "WEDNESDAY",
+    setData: [
+      {
+        count: 3,
+        second: 10,
+      },
+      {
+        count: 15,
+        second: 39,
+      },
+      {
+        count: 3,
+        second: 15,
+      },
+      {
+        count: 3,
+        second: 15,
+      },
+      {
+        count: 5,
+        second: 20,
+      },
+    ],
+    snsLink: "",
+  },
+  {
+    id: 3,
+    date: "2024-09-23",
+    day: "MONDAY",
+    setData: [
+      {
+        count: 3,
+        second: 10,
+      },
+      {
+        count: 17,
+        second: 42,
+      },
+      {
+        count: 7,
+        second: 25,
+      },
+      {
+        count: 5,
+        second: 20,
+      },
+      {
+        count: 5,
+        second: 20,
+      },
+      {
+        count: 5,
+        second: 20,
+      },
+      {
+        count: 5,
+        second: 20,
+      },
+    ],
+    snsLink: "",
+  },
+  {
+    id: 4,
+    date: "2024-09-24",
+    day: "TUESDAY",
+    setData: [
+      {
+        count: 7,
+        second: 18,
+      },
+      {
+        count: 5,
+        second: 13,
+      },
+      {
+        count: 5,
+        second: 17,
+      },
+      {
+        count: 10,
+        second: 25,
+      },
+      {
+        count: 15,
+        second: 36,
+      },
+      {
+        count: 7,
+        second: 20,
+      },
+      {
+        count: 7,
+        second: 20,
+      },
+      {
+        count: 5,
+        second: 15,
+      },
+    ],
+    snsLink: "",
+  },
+  {
+    id: 5,
+    date: "2024-09-25",
+    day: "WEDNESDAY",
+    setData: [
+      {
+        count: 3,
+        second: 10,
+      },
+      {
+        count: 12,
+        second: 33,
+      },
+      {
+        count: 5,
+        second: 17,
+      },
+      {
+        count: 5,
+        second: 17,
+      },
+      {
+        count: 5,
+        second: 17,
+      },
+      {
+        count: 4,
+        second: 12,
+      },
+      {
+        count: 3,
+        second: 10,
+      },
+      {
+        count: 3,
+        second: 10,
+      },
+    ],
+    snsLink: "",
+  },
+  {
+    id: 6,
+    date: "2024-09-26",
+    day: "THURSDAY",
+    setData: [
+      {
+        count: 3,
+        second: 10,
+      },
+      {
+        count: 15,
+        second: 37,
+      },
+      {
+        count: 5,
+        second: 15,
+      },
+      {
+        count: 5,
+        second: 15,
+      },
+      {
+        count: 5,
+        second: 15,
+      },
+    ],
+    snsLink: "",
+  },
+  {
+    id: 7,
+    date: "2024-10-02",
+    day: "WEDNESDAY",
+    setData: [
+      {
+        count: 5,
+        second: 15,
+      },
+      {
+        count: 17,
+        second: 41,
+      },
+      {
+        count: 5,
+        second: 15,
+      },
+      {
+        count: 5,
+        second: 15,
+      },
+      {
+        count: 5,
+        second: 15,
+      },
+      {
+        count: 5,
+        second: 15,
+      },
+    ],
+    snsLink: "",
+  },
+];

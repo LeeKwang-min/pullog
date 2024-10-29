@@ -1,5 +1,6 @@
 import { IPullupData } from "@/@types/pullup";
 import { Database } from "@/@types/supabase";
+import { DATA_SET_FOR_UNAUTH } from "@/const/tmpData";
 import { createClient } from "@/lib/supabase/client";
 import { createClient as createServerClient } from "@/lib/supabase/server";
 import { format } from "date-fns";
@@ -24,10 +25,20 @@ const handleDataForClient = (records: TPullupRecord[], sets: TPullupSet[]) => {
   });
 };
 
+export const getUserId = async () => {
+  const supabase = createClient();
+  const user = await supabase.auth.getUser();
+  const userId = user.data.user?.id;
+
+  return userId;
+};
+
 export const getPullupRecord = async () => {
   const supabase = createClient();
   const user = await supabase.auth.getUser();
-  const userId = user.data.user?.id || "";
+  const userId = user.data.user?.id;
+
+  if (!userId) return DATA_SET_FOR_UNAUTH;
 
   try {
     const { data: records, error: recordError } = await supabase
@@ -69,7 +80,9 @@ export const getPullupRecord = async () => {
 export const getPullupRecordSever = async () => {
   const supabase = await createServerClient();
   const user = await supabase.auth.getUser();
-  const userId = user.data.user?.id || "";
+  const userId = user.data.user?.id;
+
+  if (!userId) return DATA_SET_FOR_UNAUTH;
 
   try {
     const { data: records, error: recordError } = await supabase
@@ -113,7 +126,7 @@ export const getPullupRecordSever = async () => {
 export const getDayPullupRecord = async (date: Date) => {
   const supabase = createClient();
   const user = await supabase.auth.getUser();
-  const userId = user.data.user?.id || "";
+  const userId = user.data.user?.id;
 
   const curDate = format(date, "yyyy-MM-dd");
 
@@ -121,7 +134,7 @@ export const getDayPullupRecord = async (date: Date) => {
     const { data: records, error: recordError } = await supabase
       .from("pullup_record")
       .select("*")
-      .eq("user_id", userId)
+      .eq("user_id", userId || "")
       .eq("date", curDate)
       .order("date");
 
@@ -158,12 +171,12 @@ export const getDayPullupRecord = async (date: Date) => {
 export const upsertPullupRecord = async (data: IPullupData) => {
   const supabase = createClient();
   const user = await supabase.auth.getUser();
-  const userId = user.data.user?.id || "";
+  const userId = user.data.user?.id;
 
   const { data: recordData, error: recordError } = await supabase
     .from("pullup_record")
     .select("id")
-    .eq("user_id", userId)
+    .eq("user_id", userId || "")
     .eq("date", data.date)
     .single();
 
@@ -197,7 +210,7 @@ export const upsertPullupRecord = async (data: IPullupData) => {
     const { error: deleteError } = await supabase
       .from("pullup_set")
       .delete()
-      .eq("user_id", userId)
+      .eq("user_id", userId || "")
       .eq("record_id", recordId);
 
     if (deleteError) {

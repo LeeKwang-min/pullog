@@ -6,7 +6,6 @@ import TableSection from "./_components/TableSection";
 
 async function Dashboard() {
   const pullupData = await getPullupRecordSever();
-  // const pullupData = [];
 
   return (
     <section className="w-full h-full flex flex-col px-4 py-4 gap-4">
