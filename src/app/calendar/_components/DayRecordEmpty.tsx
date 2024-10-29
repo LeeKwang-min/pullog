@@ -9,6 +9,7 @@ import {
   CardTitle,
 } from "@/components/ui/card";
 import { useRouter } from "next/navigation";
+import useIsAuth from "@/hooks/useIsAuth";
 
 interface IProps {
   date: Date;
@@ -19,10 +20,12 @@ interface IProps {
 
 function DayRecordEmpty({ month, day, date, setDate }: IProps) {
   const router = useRouter();
+  const { isAuthenticated } = useIsAuth();
 
   const handleRecordBtn = () => {
     setDate(date);
-    router.push("/log");
+    if (isAuthenticated) router.push("/log");
+    else router.push("/log/unauth");
   };
 
   return (

@@ -1,4 +1,5 @@
-import { IPullupData } from "@/@types/pullup";
+import { IPullupData, TDayConst } from "@/@types/pullup";
+import { format, subDays } from "date-fns";
 
 export const TMP_DATA_SET: IPullupData[] = [
   {
@@ -866,4 +867,11 @@ export const DATA_SET_FOR_UNAUTH: IPullupData[] = [
     ],
     snsLink: "",
   },
-];
+].map((item, idx) => {
+  const curDate = subDays(new Date(), 7 - idx);
+  return {
+    ...item,
+    day: item.day as TDayConst,
+    date: format(curDate, "yyyy-MM-dd"),
+  };
+});

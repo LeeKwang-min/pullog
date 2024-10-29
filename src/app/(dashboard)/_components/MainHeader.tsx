@@ -16,38 +16,18 @@ import { useRouter } from "next/navigation";
 import LogoImg from "@/assets/images/pullog_logo.jpeg";
 import { Button } from "@/components/ui/button";
 import { createClient } from "@/lib/supabase/client";
-import { useEffect, useState } from "react";
+import useIsAuth from "@/hooks/useIsAuth";
 
 function MainHeader() {
   const supabase = createClient();
   const router = useRouter();
-
-  const [isAuthenticated, setIsAuthenticated] = useState(false);
-
-  useEffect(() => {
-    // 현재 세션 확인
-    const checkAuthStatus = async () => {
-      const { data } = await supabase.auth.getSession();
-      setIsAuthenticated(!!data.session);
-    };
-
-    checkAuthStatus();
-
-    // 세션 변화 감지
-    const { data: authListener } = supabase.auth.onAuthStateChange(() => {
-      checkAuthStatus();
-    });
-
-    return () => {
-      authListener?.subscription.unsubscribe();
-    };
-  }, []);
+  const { isAuthenticated } = useIsAuth();
 
   const handleCalendarBtn = () => {
     router.push("/calendar");
   };
 
-  const handleGooglLogin = async () => {
+  const handleGoogleLogin = async () => {
     const { data, error } = await supabase.auth.signInWithOAuth({
       provider: "google",
       options: {
@@ -83,7 +63,7 @@ function MainHeader() {
               ) : (
                 <Button
                   className="w-full flex items-center justify-center space-x-2"
-                  onClick={handleGooglLogin}
+                  onClick={handleGoogleLogin}
                 >
                   <svg className="w-5 h-5" viewBox="0 0 24 24">
                     <path

@@ -12,9 +12,12 @@ import { delPullupRecord, getPullupRecord } from "@/apis/pullup_record";
 import LoadingAnimation from "@/components/common/LoadingAnimation";
 import { Button } from "@/components/ui/button";
 import { findTodayDataId } from "@/lib/utils";
+import UnAuthPopup from "@/components/common/UnAuthPopup";
+import useIsAuth from "@/hooks/useIsAuth";
 
 function LogCalendar() {
   const { setDate, selectDate, isRefresh, setIsRefresh } = usePullupDateData();
+  const { isAuthenticated } = useIsAuth();
   const [pullupData, setPullupData] = useState<IPullupData[]>([]);
   const [isLoading, setIsLoading] = useState<boolean>(true);
   const selectDateId = findTodayDataId(selectDate, pullupData);
@@ -38,7 +41,8 @@ function LogCalendar() {
 
   const handleEditBtn = () => {
     setDate(selectDate);
-    router.push("/log");
+    if (isAuthenticated) router.push("/log");
+    else router.push("/log/unauth");
   };
 
   const handleDeleteBtn = async () => {
@@ -65,7 +69,7 @@ function LogCalendar() {
         </Button>
         <h1 className="text-lg font-semibold w-full text-center">풀업 달력</h1>
         <div className="flex items-center space-x-1 absolute right-0">
-          {selectDateId && (
+          {selectDateId && isAuthenticated && (
             <Button variant="ghost" size="icon" onClick={handleDeleteBtn}>
               <Trash2Icon size={20} color="#f87171" />
               <span className="sr-only">삭제</span>
@@ -77,6 +81,7 @@ function LogCalendar() {
           </Button>
         </div>
       </header>
+      <UnAuthPopup />
 
       <Calendar />
       <DayRecord pullupData={pullupData} />
