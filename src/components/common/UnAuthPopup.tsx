@@ -28,7 +28,7 @@ function UnAuthPopup() {
   if (isAuthenticated) return null;
 
   return (
-    <Card className="w-full max-w-md mx-auto bg-gradient-to-br from-blue-50 to-purple-50 border-none shadow-lg">
+    <Card className="w-full max-w-md mx-auto bg-gradient-to-br from-blue-50 to-purple-50 border-none shadow-lg animate-fade-down">
       <CardHeader className="text-center">
         <CardTitle className="text-xl font-bold text-blue-600">
           지금은 임시 데이터에요! 👋

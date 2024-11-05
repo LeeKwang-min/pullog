@@ -5,7 +5,7 @@ import { useEffect, useState } from "react";
 
 function useIsAuth() {
   const supabase = createClient();
-  const [isAuthenticated, setIsAuthenticated] = useState(false);
+  const [isAuthenticated, setIsAuthenticated] = useState(true);
 
   useEffect(() => {
     // 현재 세션 확인
