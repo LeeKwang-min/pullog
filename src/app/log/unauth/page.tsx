@@ -2,7 +2,7 @@
 
 import { ISPullupSetData } from "@/@types/pullup";
 import ScreenReaderTitle from "@/components/common/ScreenReaderTitle";
-import { useEffect, useState } from "react";
+import { Suspense, useEffect, useState } from "react";
 import { Card, CardContent, CardHeader } from "@/components/ui/card";
 import { ChevronLeftIcon, PlusIcon } from "lucide-react";
 import { useRouter } from "next/navigation";
@@ -16,6 +16,7 @@ import DayRecordSetList from "@/app/calendar/_components/DayRecordSetList";
 import UnAuthPopup from "@/components/common/UnAuthPopup";
 import { useSearchParams } from "next/navigation";
 import { getRecommendSet } from "@/lib/utils";
+import LoadingAnimation from "@/components/common/LoadingAnimation";
 
 function UnauthLog() {
   const router = useRouter();
@@ -120,4 +121,10 @@ function UnauthLog() {
   );
 }
 
-export default UnauthLog;
+export default function UnAuthLogPage() {
+  return (
+    <Suspense fallback={<LoadingAnimation />}>
+      <UnauthLog />
+    </Suspense>
+  );
+}

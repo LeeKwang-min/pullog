@@ -4,7 +4,7 @@ import { ISPullupSetData } from "@/@types/pullup";
 import ScreenReaderTitle from "@/components/common/ScreenReaderTitle";
 import { Button } from "@/components/ui/button";
 import { Plus } from "lucide-react";
-import { useEffect, useRef, useState } from "react";
+import { Suspense, useEffect, useRef, useState } from "react";
 
 import { Card, CardContent, CardHeader } from "@/components/ui/card";
 import { usePullupDateData } from "@/context/PullupDateContext";
@@ -14,6 +14,7 @@ import { Separator } from "@/components/ui/separator";
 import { getDayPullupRecord } from "@/apis/pullup_record";
 import { useSearchParams } from "next/navigation";
 import { getRecommendSet } from "@/lib/utils";
+import LoadingAnimation from "@/components/common/LoadingAnimation";
 
 function Log() {
   const searchParams = useSearchParams();
@@ -107,18 +108,16 @@ function Log() {
           >
             <Plus className="mr-2 h-4 w-4" /> 세트 추가
           </Button>
-
-          {/* <div className="w-full flex flex-col gap-1">
-            <Label htmlFor="snsLink" className="flex items-center gap-1">
-              <LinkIcon size={14} color="#4b5563" />{" "}
-              <span className="text-sm text-gray-600">SNS 링크</span>
-            </Label>
-            <Input ref={snsLinkRef} id="snsLink" className="w-full h-8" />
-          </div> */}
         </CardContent>
       </Card>
     </main>
   );
 }
 
-export default Log;
+export default function LogPage() {
+  return (
+    <Suspense fallback={<LoadingAnimation />}>
+      <Log />
+    </Suspense>
+  );
+}
