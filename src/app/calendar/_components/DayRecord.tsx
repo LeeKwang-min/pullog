@@ -9,7 +9,7 @@ import DayRecordEmpty from "./DayRecordEmpty";
 import DayRecordAnalyze from "./DayRecordAnalyze";
 import DayRecordStatistics from "./DayRecordStatistics";
 import { ImageDownIcon } from "lucide-react";
-import { findDataWithPrevious } from "@/lib/utils";
+import { findDataWithPrevious, getLastRecord } from "@/lib/utils";
 
 interface IProps {
   pullupData: IPullupData[];
@@ -33,6 +33,8 @@ function DayRecord({ pullupData }: IProps) {
         date={date}
         month={getMonth(date)}
         day={getDay(date)}
+        prev={getLastRecord(pullupData)}
+        pullupData={pullupData}
         setDate={setDate}
       />
     );

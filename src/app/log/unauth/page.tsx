@@ -2,7 +2,7 @@
 
 import { ISPullupSetData } from "@/@types/pullup";
 import ScreenReaderTitle from "@/components/common/ScreenReaderTitle";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { Card, CardContent, CardHeader } from "@/components/ui/card";
 import { ChevronLeftIcon, PlusIcon } from "lucide-react";
 import { useRouter } from "next/navigation";
@@ -14,9 +14,14 @@ import { format } from "date-fns";
 import DayRecordStatisticsChart from "@/app/calendar/_components/DayRecordStatisticsChart";
 import DayRecordSetList from "@/app/calendar/_components/DayRecordSetList";
 import UnAuthPopup from "@/components/common/UnAuthPopup";
+import { useSearchParams } from "next/navigation";
+import { getRecommendSet } from "@/lib/utils";
 
 function UnauthLog() {
   const router = useRouter();
+  const searchParams = useSearchParams();
+  const maxCount = Number(searchParams.get("maxCount"));
+
   const [pullupData, setPullupData] = useState<ISPullupSetData[]>([
     {
       count: 0,
@@ -31,6 +36,13 @@ function UnauthLog() {
       },
     ]);
   };
+
+  useEffect(() => {
+    if (maxCount) {
+      const dataToRow = getRecommendSet(maxCount);
+      setPullupData(dataToRow);
+    }
+  }, [maxCount]);
 
   return (
     <main className="relative w-full h-full flex flex-col px-4 py-4 gap-4">

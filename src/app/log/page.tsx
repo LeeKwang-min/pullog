@@ -12,8 +12,13 @@ import LogHeader from "./_components/LogHeader";
 import LogSetDataInputCard from "./_components/LogSetDataInputCard";
 import { Separator } from "@/components/ui/separator";
 import { getDayPullupRecord } from "@/apis/pullup_record";
+import { useSearchParams } from "next/navigation";
+import { getRecommendSet } from "@/lib/utils";
 
 function Log() {
+  const searchParams = useSearchParams();
+  const maxCount = Number(searchParams.get("maxCount"));
+
   const {
     date,
     getYear,
@@ -29,6 +34,13 @@ function Log() {
       count: 0,
     },
   ]);
+
+  useEffect(() => {
+    if (maxCount) {
+      const dataToRow = getRecommendSet(maxCount);
+      setPullupData(dataToRow);
+    }
+  }, [maxCount]);
 
   const handleCurDayPullupData = async () => {
     const curPullupData = await getDayPullupRecord(date);

@@ -35,3 +35,43 @@ export const findDataWithPrevious = (
 
   return { today, prev };
 };
+
+export const getLastRecord = (dataSet: IPullupData[]) => {
+  if (!dataSet.length) return null;
+
+  const lastRecord = dataSet[dataSet.length - 1];
+  return lastRecord;
+};
+
+export const findMaxCount = (dataSet: IPullupData[]) => {
+  if (!dataSet.length) return null;
+
+  const maxCount = dataSet.reduce((prev, next) => {
+    return Math.max(prev, Math.max(...next.setData.map((data) => data.count)));
+  }, 0);
+  return maxCount;
+};
+
+export const getRecommendSet = (maxCount: number) => {
+  if (maxCount < 3) {
+    const dataToRow = [
+      { set: 1, count: 1 },
+      { set: 2, count: 2 },
+      { set: 3, count: 3 },
+      { set: 4, count: 2 },
+      { set: 5, count: 1 },
+    ];
+
+    return dataToRow;
+  } else {
+    const dataToRow = [
+      { set: 1, count: Math.floor(maxCount * 0.3) },
+      { set: 2, count: Math.floor(maxCount * 0.5) },
+      { set: 3, count: Math.floor(maxCount * 0.7) },
+      { set: 4, count: Math.floor(maxCount * 0.5) },
+      { set: 5, count: Math.floor(maxCount * 0.3) },
+    ];
+
+    return dataToRow;
+  }
+};
