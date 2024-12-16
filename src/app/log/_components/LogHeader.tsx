@@ -6,6 +6,7 @@ import ScreenReaderTitle from "@/components/common/ScreenReaderTitle";
 import { ChevronLeftIcon, SaveIcon } from "lucide-react";
 import { useRouter } from "next/navigation";
 import { format } from "date-fns";
+import { toast } from "sonner";
 
 interface IProps {
   date: Date;
@@ -24,7 +25,10 @@ function LogHeader({ date, pullupData, getDayEngStr, setIsRefresh }: IProps) {
     // 4. 저장 완료 알림 후 logCalendar로 이동
 
     const filteredPullupData = pullupData.filter((dt) => dt.count !== 0);
-    if (!filteredPullupData.length) return null; // toast 띄우기
+    if (!filteredPullupData.length) {
+      toast("올바른 기록을 입력해 주세요!");
+      return null;
+    }
 
     const data = await upsertPullupRecord({
       date: format(date, "yyyy-MM-dd"),
@@ -32,9 +36,12 @@ function LogHeader({ date, pullupData, getDayEngStr, setIsRefresh }: IProps) {
       setData: filteredPullupData,
     });
 
-    if (!data) console.log("error 발생! -> Toast 띄우기");
-    else {
+    if (!data) {
+      toast("서버 오류 발생! 다시 시도해 주세요!");
+      return null;
+    } else {
       setIsRefresh((prev) => !prev);
+      toast("저장이 완료되었습니다!");
       router.back();
     }
   };

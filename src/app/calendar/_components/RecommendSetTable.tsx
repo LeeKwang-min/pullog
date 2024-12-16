@@ -17,7 +17,6 @@ import { useRouter } from "next/navigation";
 import { useEffect, useState } from "react";
 
 interface IRow {
-  set: number;
   count: number;
 }
 
@@ -58,7 +57,7 @@ function RecommendSetTable({ pullupData, date, setDate }: IProps) {
           {records.map((record, index) => (
             <TableRow key={index}>
               <TableCell className="text-center border-r text-gray-700 px-4 py-2">
-                {record.set}
+                {index + 1}
               </TableCell>
               <TableCell className="text-center border-r text-gray-700 px-4 py-2">
                 {record.count}

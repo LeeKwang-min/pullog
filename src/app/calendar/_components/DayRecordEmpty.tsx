@@ -37,6 +37,7 @@ function DayRecordEmpty({
 
     const returnDay = differenceInDays(new Date(), new Date(prev.date));
 
+    if (returnDay === 0) return "오늘도 수고하셨습니다!";
     if (returnDay === 1) return "오늘도 운동을 하러 오셨군요!";
     if (returnDay === 2) return "이틀만에 운동을 하러 오셨군요!";
 
