@@ -13,19 +13,19 @@ import { createClient } from "@/lib/supabase/client";
 import { Calendar, BookMarked } from "lucide-react";
 
 function UnAuthPopup() {
-  const supabase = createClient();
-  const { isAuthenticated } = useIsAuth();
+  // const supabase = createClient();
+  // const { isAuthenticated } = useIsAuth();
 
-  const handleGoogleLogin = async () => {
-    const { data, error } = await supabase.auth.signInWithOAuth({
-      provider: "google",
-      options: {
-        redirectTo: process.env.NEXT_PUBLIC_AUTH_REDIRECT_TO,
-      },
-    });
-  };
+  // const handleGoogleLogin = async () => {
+  //   const { data, error } = await supabase.auth.signInWithOAuth({
+  //     provider: "google",
+  //     options: {
+  //       redirectTo: process.env.NEXT_PUBLIC_AUTH_REDIRECT_TO,
+  //     },
+  //   });
+  // };
 
-  if (isAuthenticated) return null;
+  // if (isAuthenticated) return null;
 
   return (
     <Card className="w-full max-w-md mx-auto bg-gradient-to-br from-blue-50 to-purple-50 border-none shadow-lg animate-fade-down">
@@ -51,10 +51,11 @@ function UnAuthPopup() {
       </CardContent>
       <CardFooter>
         <Button
-          onClick={handleGoogleLogin}
+          // onClick={handleGoogleLogin}
+          disabled
           className="w-full bg-gradient-to-r from-blue-500 to-purple-500 hover:from-blue-600 hover:to-purple-600 text-white font-bold py-2 px-4 rounded-full transition duration-300 ease-in-out transform hover:-translate-y-1 hover:scale-105"
         >
-          지금 바로 시작하기 🚀
+          언젠간 Pro 업그레이드를 할거에요..
         </Button>
       </CardFooter>
     </Card>

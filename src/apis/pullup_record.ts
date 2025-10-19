@@ -78,49 +78,51 @@ export const getPullupRecord = async () => {
 };
 
 export const getPullupRecordSever = async () => {
-  const supabase = await createServerClient();
-  const user = await supabase.auth.getUser();
-  const userId = user.data.user?.id;
+  return DATA_SET_FOR_UNAUTH;
 
-  if (!userId) return DATA_SET_FOR_UNAUTH;
+  // const supabase = await createServerClient();
+  // const user = await supabase.auth.getUser();
+  // const userId = user.data.user?.id;
 
-  try {
-    const { data: records, error: recordError } = await supabase
-      .from("pullup_record")
-      .select("*")
-      .eq("user_id", userId)
-      .order("date", {
-        ascending: false,
-      });
+  // if (!userId) return DATA_SET_FOR_UNAUTH;
 
-    if (recordError) {
-      throw recordError;
-    }
+  // try {
+  //   const { data: records, error: recordError } = await supabase
+  //     .from("pullup_record")
+  //     .select("*")
+  //     .eq("user_id", userId)
+  //     .order("date", {
+  //       ascending: false,
+  //     });
 
-    if (!records || records.length === 0) {
-      console.log("No records found for this user");
-      return [];
-    }
+  //   if (recordError) {
+  //     throw recordError;
+  //   }
 
-    // 2. 조회된 기록의 id 목록 추출
-    const recordIds = records.map((record) => record.id);
+  //   if (!records || records.length === 0) {
+  //     console.log("No records found for this user");
+  //     return [];
+  //   }
 
-    // 3. pullup_set 테이블에서 기록 id에 해당하는 세트 조회
-    const { data: sets, error: setError } = await supabase
-      .from("pullup_set")
-      .select("*")
-      .in("record_id", recordIds);
+  //   // 2. 조회된 기록의 id 목록 추출
+  //   const recordIds = records.map((record) => record.id);
 
-    if (setError) {
-      throw setError;
-    }
+  //   // 3. pullup_set 테이블에서 기록 id에 해당하는 세트 조회
+  //   const { data: sets, error: setError } = await supabase
+  //     .from("pullup_set")
+  //     .select("*")
+  //     .in("record_id", recordIds);
 
-    // 4. 조회된 데이터 반환
-    return handleDataForClient(records, sets) as IPullupData[];
-  } catch (e) {
-    console.error("Error fetching data:", e);
-    return [];
-  }
+  //   if (setError) {
+  //     throw setError;
+  //   }
+
+  //   // 4. 조회된 데이터 반환
+  //   return handleDataForClient(records, sets) as IPullupData[];
+  // } catch (e) {
+  //   console.error("Error fetching data:", e);
+  //   return [];
+  // }
 };
 
 export const getDayPullupRecord = async (date: Date) => {

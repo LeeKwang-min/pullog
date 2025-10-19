@@ -17,7 +17,7 @@ import useIsAuth from "@/hooks/useIsAuth";
 
 function LogCalendar() {
   const { setDate, selectDate, isRefresh, setIsRefresh } = usePullupDateData();
-  const { isAuthenticated } = useIsAuth();
+  // const { isAuthenticated } = useIsAuth();
   const [pullupData, setPullupData] = useState<IPullupData[]>([]);
   const [isLoading, setIsLoading] = useState<boolean>(true);
   const selectDateId = findTodayDataId(selectDate, pullupData);
@@ -41,8 +41,9 @@ function LogCalendar() {
 
   const handleEditBtn = () => {
     setDate(selectDate);
-    if (isAuthenticated) router.push("/log");
-    else router.push("/log/unauth");
+    // if (isAuthenticated) router.push("/log");
+    // else
+    router.push("/log/unauth");
   };
 
   const handleDeleteBtn = async () => {
@@ -68,7 +69,7 @@ function LogCalendar() {
           <span className="sr-only">뒤로 가기</span>
         </Button>
         <h1 className="text-lg font-semibold w-full text-center">풀업 달력</h1>
-        <div className="flex items-center space-x-1 absolute right-0">
+        {/* <div className="flex items-center space-x-1 absolute right-0">
           {selectDateId && isAuthenticated && (
             <Button variant="ghost" size="icon" onClick={handleDeleteBtn}>
               <Trash2Icon size={20} color="#f87171" />
@@ -79,7 +80,7 @@ function LogCalendar() {
             <PencilIcon size={20} />
             <span className="sr-only">수정</span>
           </Button>
-        </div>
+        </div> */}
       </header>
       <UnAuthPopup />
 

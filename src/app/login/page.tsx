@@ -11,16 +11,16 @@ import {
 import { createClient } from "@/lib/supabase/client";
 
 function Login() {
-  const supabase = createClient();
+  // const supabase = createClient();
 
-  const handleGooglLogin = async () => {
-    const { data, error } = await supabase.auth.signInWithOAuth({
-      provider: "google",
-      options: {
-        redirectTo: process.env.NEXT_PUBLIC_AUTH_REDIRECT_TO,
-      },
-    });
-  };
+  // const handleGooglLogin = async () => {
+  //   const { data, error } = await supabase.auth.signInWithOAuth({
+  //     provider: "google",
+  //     options: {
+  //       redirectTo: process.env.NEXT_PUBLIC_AUTH_REDIRECT_TO,
+  //     },
+  //   });
+  // };
 
   return (
     <Card className="w-full max-w-sm">
@@ -40,7 +40,8 @@ function Login() {
       <CardFooter>
         <Button
           className="w-full flex items-center justify-center space-x-2"
-          onClick={handleGooglLogin}
+          // onClick={handleGooglLogin}
+          disabled
         >
           <svg className="w-5 h-5" viewBox="0 0 24 24">
             <path

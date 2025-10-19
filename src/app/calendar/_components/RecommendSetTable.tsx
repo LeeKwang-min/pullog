@@ -28,15 +28,16 @@ interface IProps {
 
 function RecommendSetTable({ pullupData, date, setDate }: IProps) {
   const router = useRouter();
-  const { isAuthenticated } = useIsAuth();
+  // const { isAuthenticated } = useIsAuth();
 
   const [records, setRecords] = useState<IRow[]>([]);
   const maxCount = findMaxCount(pullupData) || 3;
 
   const handleRecordBtn = () => {
     setDate(date);
-    if (isAuthenticated) router.push(`/log?maxCount=${maxCount}`);
-    else router.push(`/log/unauth?maxCount=${maxCount}`);
+    // if (isAuthenticated) router.push(`/log?maxCount=${maxCount}`);
+    // else
+    router.push(`/log/unauth?maxCount=${maxCount}`);
   };
 
   useEffect(() => {
